@@ -12,7 +12,7 @@ class HomePage extends Component {
     }
     render() {
         return (
-            <IntlProvider
+            <IntlProvider  
         locale={this.props.currentLanguage}
         messages={messages[this.props.currentLanguage]}>
         <div className="App">
