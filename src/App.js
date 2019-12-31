@@ -6,6 +6,8 @@ import MultiLanguage from "./components/MultiLanguage";
 import VideoSource from "./components/VideoSource";
 import Header from "./components/header";
 import { BrowserRouter, Route } from "react-router-dom";
+import ClientListing from "./components/ClientListing";
+import AuthComponent from "./components/AuthComponent";
 
 function App() {
   return (
@@ -22,8 +24,9 @@ function App() {
       </Player> */}
 
         <Route exact path="/" render={() => <div>Home</div>} />
-        <Route exact path="/client-list" render={() => <div>client</div>} />
+        <Route exact path="/client-list" component={ClientListing} />
         <Route exact path="/server-list" render={() => <div>server</div>} />
+        <Route exact path="/auth" component={AuthComponent} />
       </BrowserRouter>
     </div>
   );
