@@ -9,7 +9,7 @@ function App() {
   return (
     <div className="App">
       <MultiLanguage />
-      <Player width="50%" muted={true}>
+      <Player muted={true} fluid={false} width={500} height={500}>
         <VideoSource
           isVideoChild
           src="https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"
