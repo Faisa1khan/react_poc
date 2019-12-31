@@ -12,7 +12,7 @@ const NavBar = () => {
         <nav className="site-nav nav-padding">
 
             <div className="site-nav-left">
-              <a><FormattedMessage id="nav.home" defaultMessage="Home" /></a>
+              <a><FormattedMessage id="home" defaultMessage="Home" /></a>
               <a><FormattedMessage id="nav.about" defaultMessage="About Us" /></a>
               <a><FormattedMessage id="nav.contact" defaultMessage="Contact" /></a>
             </div>

@@ -1,0 +1,32 @@
+                                            Hooks
+const [count,setCount]=useState(0)
+//setCount will cause rerender
+//dont call hooks inside loops, conditions, nested functions
+//only call hooks from react functions
+//setCount(pevVal=>prevVal+some_int)
+//will have to use ... with objects and arrays
+//Replace componentDidMount, componentWillUnmount, componentDidUpdate with useEffect
+//Runs on every rerender
+useEffect(()=>{
+
+},[//add parameters based on which rerendering should depend])
+    //second parameter array is to listen for specific state values/prop values only
+    //If second parameter array is empty, useEffect will only run once
+        //to  add event listeners
+    //return function is the cleanup function i.e componentWillUnmount
+    //Use setCount(prevState=>prevState+1) instead of setCount(count+1) to avoid issue of non rerendering
+    //  Or make sure to pass all state variables in dependency list whose change must cause rerender
+
+
+const variable=useContext(contextName)
+    //context is created the same way using createContext() as before
+
+useReducer
+    
+    const [state,dispatch]=useReducer(reducer,initialState)
+
+useCallback
+    Note:React.memo is an HOC for functional components while PureComponent is for class based components
+
+    
+    
