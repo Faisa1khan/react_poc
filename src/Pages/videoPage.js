@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+
 import Header from "../Components/header";
+import VideoPlayer from "../Components/videoPlayer/videoPlayer";
 
 import "./videoPage.scss";
+
 
 class VideoPage extends Component{
 
@@ -12,8 +15,8 @@ class VideoPage extends Component{
                 <div className="video-page__header">
                     <Header />
                 </div>
-                <div className="video-page__video">
-                    Video
+                <div className="video-page__video-player">
+                    <VideoPlayer />
                 </div>
             </div>
         )
