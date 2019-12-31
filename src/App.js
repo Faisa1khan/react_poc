@@ -1,24 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import { Player } from "video-react";
+import "../node_modules/video-react/dist/video-react.css"; // import css
+import MultiLanguage from "./components/MultiLanguage";
+import VideoSource from "./components/VideoSource";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <MultiLanguage />
+      <Player muted={true} fluid={false} width={500} height={500}>
+        <VideoSource
+          isVideoChild
+          src="https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"
+        />
+      </Player>
     </div>
   );
 }
