@@ -2,8 +2,10 @@ import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
 import store from "./store";
 import { Provider } from "react-redux";
+// import Auth from "auth";
 
 import "./index.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 import "./i18n";
 
