@@ -5,7 +5,9 @@ import { Provider } from "react-redux";
 // import Auth from "auth";
 
 import "./index.css";
-import "bootstrap/dist/css/bootstrap.min.css";
+
+import 'bootstrap/dist/css/bootstrap.css';
+
 
 import "./i18n";
 
