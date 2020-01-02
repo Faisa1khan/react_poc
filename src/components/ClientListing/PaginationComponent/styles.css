@@ -1,0 +1,40 @@
+.page-list-item{
+    display: inline;
+    border: 1px solid;
+    margin:2px;
+    cursor: pointer;
+       
+}
+
+.page-list-item.active{
+    display: inline;
+    border: 1px solid rgb(7, 105, 218);
+    background-color: rgb(7, 105, 218);
+    color: white;
+     
+    margin:2px;
+}
+
+.page-list-item>a{
+    padding:5px;
+    outline: none;
+}
+
+ 
+.page-list-handles{
+    cursor: pointer;
+    display: inline;
+    padding: 10px;
+    border: 1px solid rgb(7, 105, 218);
+    background-color: rgb(7, 105, 218);
+    color: white;
+    margin:2px;
+}
+
+.page-list-handles>a{
+    padding:10px;
+    outline: none;
+}
+page-list-next{
+    
+}

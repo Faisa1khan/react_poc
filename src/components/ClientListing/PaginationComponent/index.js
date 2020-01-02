@@ -1,56 +1,40 @@
-import React, { useEffect ,useState} from 'react';
-import {Pagination} from 'react-bootstrap'
-
-/*
-    This component will receive two props pageCount and active page
-    Will only change if page count changes
-    pageCount depends on dataLength and sizePerPage
-
-    Will have to understand useMemo and useCallback because of multiple unnecessary renders
-*/
+import React from 'react';
+import ReactPagination from 'react-paginate'
+import './styles.css'
+import { setActivePage } from '../../../actions';
+import { connect } from 'react-redux';
 
 
 
-function PaginationComponent({pageCount,activePage}) {
+function PaginationComponent(props) {
 
-    const [prevCount,setPrevCount]=useState(-1)
     
-    
-    useEffect(()=>{
-         console.log('pageCount changed',prevCount,pageCount)
-         setPrevCount(pageCount)
-         
-    },[pageCount])
-    
-    console.log('rendered',prevCount==pageCount)
 
-    const pageItems=[]
-    
-        
-    for(let i=1;i<=prevCount;i++)
-    {
-        pageItems.push(
-        <Pagination.Item key={i} active={i === activePage}>
-            {i}
-        </Pagination.Item>
-        )
-    }
-    
-        
-    
-    return(
-       
-        <div>
-            <Pagination>
-
-               {pageItems}
-              
-               
-                      
-        </Pagination>
-         
-        </div>
+    return( 
+    <ReactPagination 
+        pageClassName={'page-list-item'} 
+        previousClassName={'page-list-handles'}
+        nextClassName={'page-list-handles'}
+        breakClassName={'page-list-item'} 
+        pageCount={props.pageCount}
+        onPageChange={(pgNo)=>props.setActivePage(pgNo.selected+1)}
+        activeClassName={'page-list-item active'}
+        forcePage={props.activePage-1}
+    />
     )
+
 }
 
-export default PaginationComponent;
+const mapStateToProps=(store)=>{
+    return{
+        activePage:store.clientListing.activePage
+    }
+}
+
+const mapDispatchToProps=(dispatch)=>{
+    return{
+        setActivePage:(page)=>dispatch(setActivePage(page))
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(PaginationComponent);

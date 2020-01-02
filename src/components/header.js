@@ -1,10 +1,11 @@
 import React from "react";
 import { Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import './header.css'
 
 const Header = () => {
   return (
-    <Nav activeKey="/">
+    <Nav className='dark' variant='tabs' activeKey="/">
       <Nav.Link as={Link} to='/'>
         Home
       </Nav.Link>
