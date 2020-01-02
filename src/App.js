@@ -1,31 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
-import { Player } from "video-react";
 import "../node_modules/video-react/dist/video-react.css"; // import css
-import MultiLanguage from "./components/MultiLanguage";
-import VideoSource from "./components/VideoSource";
-import Header from "./components/header";
-import { BrowserRouter, Route } from "react-router-dom";
+import Auth from "./auth";
+import { Route } from "react-router-dom";
+import Header from "./components/Header";
+import ServerPagination from "./components/ServerPagination";
 
 function App() {
+  console.log(window.localStorage.getItem("auth"));
+  const initialValue = () => window.localStorage.getItem("auth") || false;
+  const [auth, setAuth] = useState(initialValue);
+  console.log(auth);
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Header />
-
-        {/* <MultiLanguage /> */}
-        {/* <Player muted={true} fluid={false} width={500} height={500}>
-        <VideoSource
-          isVideoChild
-          src="https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"
-        />
-      </Player> */}
-
-        <Route exact path="/" render={() => <div>Home</div>} />
-        <Route exact path="/client-list" render={() => <div>client</div>} />
-        <Route exact path="/server-list" render={() => <div>server</div>} />
-      </BrowserRouter>
-    </div>
+    <>
+      {auth ? (
+        <div className="App">
+          <Header />
+          <Route exact path="/" render={() => <div>Home</div>} />
+          <Route exact path="/client-side" render={() => <div>client</div>} />
+          <Route exact path="/server-side" component={ServerPagination} />
+        </div>
+      ) : (
+        <Auth login={setAuth} />
+      )}
+    </>
   );
 }
 
