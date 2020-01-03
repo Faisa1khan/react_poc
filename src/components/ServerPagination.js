@@ -19,6 +19,7 @@ const ServerPagination = () => {
   const [sortOrder, setSortOrder] = useState("asc");
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
+  const [searchInput, setSearchInput] = useState("");
   console.log(pageSize);
 
   const onShowSizeChange = (current, pageSize) => {
@@ -37,6 +38,7 @@ const ServerPagination = () => {
     axios
       .get(endpoint + "people", {
         params: {
+          q: searchInput,
           _page: currentPage,
           _limit: pageSize,
           _sort: sortBy,
@@ -45,14 +47,18 @@ const ServerPagination = () => {
       })
       .then(response => setData(response.data))
       .catch(error => console.error(error));
-  }, [currentPage, pageSize, sortBy, sortOrder]);
+  }, [currentPage, pageSize, sortBy, sortOrder, searchInput]);
 
   return (
     <Container>
       <Row className="mb-3 mt-3">
         <Col lg={3}>
           <InputGroup size="sm">
-            <FormControl aria-describedby="basic-addon1" />
+            <FormControl
+              aria-describedby="basic-addon1"
+              value={searchInput}
+              onChange={e => setSearchInput(e.target.value)}
+            />
           </InputGroup>
         </Col>
         <Col lg={3}>
