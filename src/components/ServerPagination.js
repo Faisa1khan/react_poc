@@ -1,54 +1,114 @@
-import React, { Fragment, useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState } from "react";
 import Pagination from "rc-pagination";
 import localeInfo from "rc-pagination/lib/locale/en_US";
 import "rc-pagination/assets/index.css";
-import { Table } from "react-bootstrap";
-import { data as localData } from "../api/data";
+import {
+  Table,
+  InputGroup,
+  FormControl,
+  Container,
+  Col,
+  Row,
+  Button
+} from "react-bootstrap";
 import axios from "axios";
+import endpoint from "../endpoint";
 
 const ServerPagination = () => {
-  const [api, setApi] = useState("offset-10-1");
+  const [sortBy, setSortBy] = useState("name");
+  const [sortOrder, setSortOrder] = useState("asc");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
+  console.log(pageSize);
 
-  console.log(localData);
   const onShowSizeChange = (current, pageSize) => {
     console.log(current);
     console.log(pageSize);
   };
 
   const handlePageChange = (current, pageSize) => {
-    setApi(`offset-10-${current}`);
-    console.log(api);
+    setCurrentPage(current);
     console.log("onChange:current=", current);
   };
 
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    console.log(localData[api]);
     axios
-      .get(localData[api])
+      .get(endpoint + "people", {
+        params: {
+          _page: currentPage,
+          _limit: pageSize,
+          _sort: sortBy,
+          _order: sortOrder
+        }
+      })
       .then(response => setData(response.data))
       .catch(error => console.error(error));
-  }, [api]);
+  }, [currentPage, pageSize, sortBy, sortOrder]);
 
   return (
-    <Fragment>
+    <Container>
+      <Row className="mb-3 mt-3">
+        <Col lg={3}>
+          <InputGroup size="sm">
+            <FormControl aria-describedby="basic-addon1" />
+          </InputGroup>
+        </Col>
+        <Col lg={3}>
+          <select
+            onChange={e => setPageSize(e.target.value)}
+            defaultValue={pageSize}
+          >
+            <option value="10" defaultValue>
+              10
+            </option>
+            <option value="20">20</option>
+            <option value="30">30</option>
+          </select>
+        </Col>
+        <Col lg={{ span: 2, offset: 4 }}>
+          <Button
+            variant="secondary"
+            size="sm"
+            className="mr-1"
+            onClick={() => setSortOrder("asc")}
+          >
+            Asc
+          </Button>
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={() => setSortOrder("dsc")}
+          >
+            Dsc
+          </Button>
+        </Col>
+      </Row>
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th>#</th>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Gender</th>
+            <th>
+              <Button onClick={() => setSortBy("name")}>Name</Button>
+            </th>
+            <th onClick={() => setSortBy("username")}>
+              <Button onClick={() => setSortBy("username")}>Username</Button>
+            </th>
+            <th>
+              <Button onClick={() => setSortBy("email")}>Email</Button>
+            </th>
+            <th>
+              <Button onClick={() => setSortBy("city")}>City</Button>
+            </th>
           </tr>
         </thead>
         <tbody>
-          {data.map(({ _id, name, details }, index) => (
-            <tr key={_id}>
-              <td>{index + 1}</td>
-              <td>{_id}</td>
+          {data.map(({ name, username, email, address }) => (
+            <tr key={username}>
               <td>{name}</td>
-              <td>{details.gender}</td>
+              <td>{username}</td>
+              <td>{email}</td>
+              <td>{address.city}</td>
             </tr>
           ))}
         </tbody>
@@ -56,14 +116,14 @@ const ServerPagination = () => {
       <Pagination
         showQuickJumper
         showSizeChanger
-        defaultPageSize={15}
+        defaultPageSize={10}
         defaultCurrent={1}
-        total={450}
+        total={100}
         locale={localeInfo}
         onShowSizeChange={onShowSizeChange}
         onChange={handlePageChange}
       />
-    </Fragment>
+    </Container>
   );
 };
 
