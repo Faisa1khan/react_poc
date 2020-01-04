@@ -13,6 +13,7 @@ import {
 } from "react-bootstrap";
 import axios from "axios";
 import endpoint from "../endpoint";
+import { useDebounce } from "../utils/hooks/useDebounce";
 
 const ServerPagination = () => {
   const [sortBy, setSortBy] = useState("name");
@@ -20,7 +21,7 @@ const ServerPagination = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
   const [searchInput, setSearchInput] = useState("");
-  console.log(pageSize);
+  const input = useDebounce(searchInput, 500);
 
   const onShowSizeChange = (current, pageSize) => {
     console.log(current);
@@ -38,7 +39,7 @@ const ServerPagination = () => {
     axios
       .get(endpoint + "people", {
         params: {
-          q: searchInput,
+          q: input,
           _page: currentPage,
           _limit: pageSize,
           _sort: sortBy,
@@ -47,7 +48,9 @@ const ServerPagination = () => {
       })
       .then(response => setData(response.data))
       .catch(error => console.error(error));
-  }, [currentPage, pageSize, sortBy, sortOrder, searchInput]);
+  }, [currentPage, pageSize, sortBy, sortOrder, input]);
+
+  // Effect for API call
 
   return (
     <Container>

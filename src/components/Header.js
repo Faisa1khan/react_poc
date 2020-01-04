@@ -1,14 +1,10 @@
 import React from "react";
 import { Nav, Navbar, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import history from "../history";
+import { useAuth } from "../utils/hooks/useAuth";
 const Header = () => {
-  const handleLogout = () => {
-    window.localStorage.removeItem("auth");
-    console.log(history);
-    window.location.reload();
-    // history.push("/");
-  };
+  const { signout, user } = useAuth();
+
   return (
     <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
       <Navbar.Brand as={Link} to="/">
@@ -25,9 +21,9 @@ const Header = () => {
           </Nav.Link>
         </Nav>
         <Nav className="align-items-center">
-          <Nav.Link>User</Nav.Link>
+          <Nav.Link>{user}</Nav.Link>
           <Nav.Link>
-            <Button size="sm" onClick={handleLogout}>
+            <Button size="sm" onClick={() => signout()}>
               Logout
             </Button>
           </Nav.Link>

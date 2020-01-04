@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import "./App.css";
 import "../node_modules/video-react/dist/video-react.css"; // import css
@@ -6,10 +6,9 @@ import Auth from "./auth";
 import { Route } from "react-router-dom";
 import Header from "./components/Header";
 import ServerPagination from "./components/ServerPagination";
-
+import { useAuth } from "./utils/hooks/useAuth";
 function App() {
-  const initialValue = () => window.localStorage.getItem("auth") || false;
-  const [auth, setAuth] = useState(initialValue);
+  const { auth, signin } = useAuth();
   return (
     <>
       {auth ? (
@@ -20,7 +19,7 @@ function App() {
           <Route exact path="/server-side" component={ServerPagination} />
         </div>
       ) : (
-        <Auth login={setAuth} />
+        <Auth signin={signin} />
       )}
     </>
   );

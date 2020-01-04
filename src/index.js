@@ -12,12 +12,15 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { Router } from "react-router-dom";
 import history from "./history";
+import { ProvideAuth } from "./utils/hooks/useAuth";
 
 ReactDOM.render(
   <Provider store={store}>
     <Suspense fallback="loading">
       <Router history={history}>
-        <App />
+        <ProvideAuth>
+          <App />
+        </ProvideAuth>
       </Router>
     </Suspense>
   </Provider>,
