@@ -11,16 +11,17 @@ function PaginationComponent(props) {
     
 
     return( 
-    <ReactPagination 
-        pageClassName={'page-list-item'} 
-        previousClassName={'page-list-handles'}
-        nextClassName={'page-list-handles'}
-        breakClassName={'page-list-item'} 
-        pageCount={props.pageCount}
-        onPageChange={(pgNo)=>props.setActivePage(pgNo.selected+1)}
-        activeClassName={'page-list-item active'}
-        forcePage={props.activePage-1}
-    />
+        <ReactPagination 
+            pageClassName={'page-list-item'} 
+            previousClassName={'page-list-handles'}
+            nextClassName={'page-list-handles'}
+            breakClassName={'page-list-item'} 
+            pageCount={props.pageCount}
+             
+            onPageChange={(pgNo)=>props.setActivePage(pgNo.selected+1)}
+            activeClassName={'page-list-item active'}
+            forcePage={props.activePage-1}
+        />
     )
 
 }

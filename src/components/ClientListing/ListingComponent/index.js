@@ -13,23 +13,27 @@ function getPageItems(data,context)
     return data.slice(context.firstItemIndex,context.lastItemIndex+1)
 }
 
-function ListingComponent({data,attributes,paginationContext}) {
+function ListingComponent({filter,filtered_data,attributes,paginationContext}) {
     return(
-        <Table>
-              
+        <Table >
+
             <thead>
                 <tr>
                 {
                 attributes.map((item,index)=>{
                     return(
-                    <th key={index}>{item}</th>
+                    <th key={index}>
+                        {item=='ctc'?<span>CTC<span>
+                             
+                        </span></span>:item}
+                    </th>
                     )
                 })
             }
                 </tr>
             </thead>
             <tbody>
-                {getPageItems(data,paginationContext).map((item)=>{
+                {getPageItems(filtered_data,paginationContext).map((item)=>{
                     return(
                       <tr key={item._id}>
                           {
@@ -54,5 +58,11 @@ function ListingComponent({data,attributes,paginationContext}) {
         </Table>
     )
 }
+
+// const mapStateToProps=(store)=>{
+//     return{
+//         data:
+//     }
+// }
 
 export default ListingComponent;

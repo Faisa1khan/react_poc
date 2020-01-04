@@ -44,23 +44,27 @@ function AuthComponent() {
 
     return (
 
-        <Form style={{width:'25%',padding:20}}>
-            <Form.Group controlId='authEmail'>
-                <Form.Label>Username / Email Id</Form.Label>
-                <Form.Control value={email} onChange={(e) => setEmail(e.target.value)} placeholder='Enter Username / Email-id' />
-            </Form.Group>
-            <Form.Group controlId='authPassword'>
-                <Form.Label>Password</Form.Label>
-                <Form.Control type='password' value={password} onChange={(e) => setPassword(e.target.value)} placeholder='Enter Password' />
-            </Form.Group>
-            <Form.Text style={{ color: error ? 'red' : 'green' }} >
-                {error ? error.message : null}
-            </Form.Text>
-            <Button variant='primary' onClick={() => authenticate(email, password)}>
-                {loading ? 'Loading..' : 'Login'}
-            </Button>
+        
+            <Form style={{width:'25%', position:'absolute',marginTop:'15%',marginLeft:'50%',transform:'translate(-50%)' }}>
+                <Form.Group controlId='authEmail'>
+                    <Form.Label>Username / Email Id</Form.Label>
+                    <Form.Control value={email} onChange={(e) => setEmail(e.target.value)} placeholder='Enter Username / Email-id' />
+                </Form.Group>
+                <Form.Group controlId='authPassword'>
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control type='password' value={password} onChange={(e) => setPassword(e.target.value)} placeholder='Enter Password' />
+                </Form.Group>
+                <Form.Text style={{ color: error ? 'red' : 'green' }} >
+                    {error ? error.message : null}
+                </Form.Text>
+                <center>
+                <Button variant='primary' onClick={() => authenticate(email, password)}>
+                    {loading ? 'Loading..' : 'Login'}
+                </Button>
+                </center>
 
-        </Form>
+            </Form>
+        
 
     )
 }
