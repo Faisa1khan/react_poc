@@ -6,7 +6,7 @@ import FilterComponent from './FilterComponent';
 import { connect } from 'react-redux';
 import {getData} from '../../actions';
 import {get} from 'lodash'
-import { Container,Row,Col, Spinner } from 'react-bootstrap';
+import { Container,Row,Col, Spinner, Jumbotron } from 'react-bootstrap';
 import ExportComponent from './ExportComponent.js';
 
 
@@ -27,11 +27,22 @@ function ClientListing(props) {
        
         <Container fluid>
            
+             
             <Row>
-            <Col sm={9}><FilterComponent defaultItemCount={props.itemsPerPage} /></Col>
-            <Col sm={3}><ExportComponent /></Col>
+              <Col sm={9}>
+                 
+                  <FilterComponent defaultItemCount={props.itemsPerPage} />
+                
+              </Col>
+              <Col sm={3}>
+                 
+                <ExportComponent />
+                
+              </Col>
+           
            
             </Row>
+            
         </Container>
         <br/>  
         <b>{`Search returned ${props.filtered_data.length} results`}</b>     

@@ -73,7 +73,7 @@ const getKeywordSearchResult=(current_data,default_data,keyword,attr)=>{
 
 const sortByAttribute=(data,attr,asc)=>{
     if(data.length==0 || asc===null || attr===null) return data
-    return [...data].sort((a,b)=>{
+    return [...data].sort((a,b)=>{ // Here a deep copy has been created for data otherwise it will get mutated
         if(asc===true)
             return _.get(a,attr.split('.'))-_.get(b,attr.split('.'))
         else if(asc===false)

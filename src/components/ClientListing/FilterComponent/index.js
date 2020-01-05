@@ -1,5 +1,5 @@
 import React, { useMemo,useState, useEffect} from 'react';
-import { DropdownButton, Dropdown, InputGroup, FormControl, Container, Row, Col, Button } from 'react-bootstrap';
+import { DropdownButton, Dropdown,   FormControl, Container, Row, Col, Button } from 'react-bootstrap';
 import { connect } from 'react-redux'
 import { setItemsPerPage,setFilteredData } from '../../../actions'
 import {getAttributeSet} from '../../../utils/FilterUtil'
@@ -47,16 +47,14 @@ function FilterComponent(props) {
         <Container fluid>
              
             <Row >
-                <Col lg={2} >
-                    <InputGroup className="mb-3">
-                        <FormControl value={filter.keyword===null?'':filter.keyword} onChange={(e)=>setFilter({...filter,keyword:e.target.value})}/>
-                        <InputGroup.Append>
-                            <InputGroup.Text  style={{ cursor: 'pointer' }}>Search</InputGroup.Text>
-                        </InputGroup.Append>
-                    </InputGroup>
+                <Col lg={4} >
+                   
+                        <FormControl placeholder='Enter keyword' value={filter.keyword===null?'':filter.keyword} onChange={(e)=>setFilter({...filter,keyword:e.target.value})}/>
+                         
+                    
                 </Col>
                 
-                <Col lg={2}>
+                <Col lg={1}>
                       <DropdownButton title='Location'>
                         {
                             getAttributeSet(props.data,'details.location_id').map((location)=>{
@@ -67,7 +65,7 @@ function FilterComponent(props) {
                         }
                       </DropdownButton>  
                 </Col>
-                <Col lg={2}>
+                <Col lg={1}>
                       <DropdownButton title='Gender'>
                       {
                             getAttributeSet(props.data,'details.gender').map((gender)=>{
@@ -78,7 +76,7 @@ function FilterComponent(props) {
                         }
                       </DropdownButton>  
                 </Col>
-                <Col lg={2}>
+                <Col lg={1}>
                         <DropdownButton title='Sort'>
                         <Dropdown.Item onClick={()=>setOrder('ctc',true)}>Sort by CTC (low to high)</Dropdown.Item>
                             <Dropdown.Item onClick={()=>setOrder('ctc',false)} >Sort by CTC (high to low)</Dropdown.Item>
@@ -107,7 +105,7 @@ function FilterComponent(props) {
                         }
                     </DropdownButton>
                 </Col>
-                <Col lg={2}>
+                <Col lg={3}>
                         <Button variant='danger' onClick={reset}>Reset</Button>
                 </Col>
                 

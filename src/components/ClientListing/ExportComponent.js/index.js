@@ -4,6 +4,30 @@ import {CSVLink} from 'react-csv'
 import {connect} from 'react-redux'
 import './styles.css'
  
+const headers=[
+    {
+        label:'ID',key:'_id'
+    },
+    {
+        label:'Name',key:'name'
+    },
+    {
+        label:'Status',key:'status'
+    },
+    {
+        label:'Location Id',key:'details.location_id'
+    },
+    {
+        label:'Gender',key:'details.gender'
+    },
+    {
+        label:'Joining Date',key:'details.joining_date'
+    },
+    {
+        label:'CTC',key:'ctc'
+    }
+
+]
 
 function ExportComponent(props) {
     return(
@@ -16,7 +40,7 @@ function ExportComponent(props) {
                         ['CSV','Excel','JSON'].map((type)=>{
                             return(
                            
-                                <CSVLink key={type} data={props.filtered_data}>{type}</CSVLink>
+                                <CSVLink headers={headers} key={type} data={props.filtered_data}>{type}</CSVLink>
                             
                             )
                         })
@@ -33,7 +57,7 @@ function ExportComponent(props) {
                             return(
                            
                                
-                                <CSVLink key={type} data={props.filtered_data}>{type}</CSVLink>
+                                <CSVLink headers={headers} key={type} data={props.data}>{type}</CSVLink>
                                 
                             
                             )
