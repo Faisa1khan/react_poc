@@ -1,17 +1,24 @@
 import { useState, useEffect } from "react";
 import { user as userList } from "../../api/users";
 import history from "../../history";
+import { useLocalStorage } from "./useLocalStorage";
 // Provider hook that creates auth object and handles state
+
 export function useProvideAuth() {
   const [user, setUser] = useState(null);
-  const authenticated = () => window.localStorage.getItem("auth") || false;
+  const [persitAuth, setPersitAuth, removeValue] = useLocalStorage(
+    "auth",
+    false
+  );
+
+  const authenticated = () => persitAuth || false;
 
   const [auth, setAuth] = useState(authenticated);
   // ... to save the user to state.
   const signin = (email, password) => {
     userList.name.map(name => {
       if (email === name && password === userList.password) {
-        window.localStorage.setItem("auth", true);
+        setPersitAuth(true);
         setAuth(true);
         setUser(email);
         return history.push("/server-side");
@@ -21,9 +28,9 @@ export function useProvideAuth() {
     });
   };
   const signout = () => {
-    window.localStorage.removeItem("auth");
+    removeValue("auth"); // from the localStorage
     setAuth(false);
-    history.push("/");
+    return history.push("/");
   };
   const signup = (email, password) => {};
   const sendPasswordResetEmail = email => {};

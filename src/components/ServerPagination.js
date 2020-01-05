@@ -21,7 +21,8 @@ const ServerPagination = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
   const [searchInput, setSearchInput] = useState("");
-  const input = useDebounce(searchInput, 500);
+  const input = useDebounce(searchInput, 500); // debounce input value
+  const [data, setData] = useState([]);
 
   const onShowSizeChange = (current, pageSize) => {
     console.log(current);
@@ -32,8 +33,6 @@ const ServerPagination = () => {
     setCurrentPage(current);
     console.log("onChange:current=", current);
   };
-
-  const [data, setData] = useState([]);
 
   useEffect(() => {
     axios
