@@ -1,7 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
-
-import { handleAjaxResponse } from "../utils";
 
 const style={
     padding: '1em'
@@ -22,7 +19,7 @@ const Login = (props) => {
         if(!password)
             return setError('Password not given')
         props.login(email, password);
-        setError('')
+        setError('');   // clear error
     }
     return (
         <form className="border" style={style} onSubmit={onSubmit}>
@@ -34,6 +31,7 @@ const Login = (props) => {
                     className="form-control" 
                     value={email}
                     onChange={(e) => changeEmail(e.target.value)}
+                    placeholder='Sincere@april.biz'
                     />
                 <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>
@@ -44,6 +42,7 @@ const Login = (props) => {
                     className="form-control" 
                     value={password} 
                     onChange={(e) => changePassword(e.target.value)}
+                    placeholder='Sincere@april.biz'
                     />
             </div>
             <button type="submit" className="btn btn-primary">Submit</button>

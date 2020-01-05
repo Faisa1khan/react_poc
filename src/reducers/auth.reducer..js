@@ -12,7 +12,7 @@ export default function auth(state={}, action){
             };
         case authConstants.LOGIN_FAILURE:
             return {
-                error: action.error
+                error: action.payload.error
             };
         case authConstants.LOGOUT:
             return {};

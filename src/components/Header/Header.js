@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
-import { authActions } from "../actions";
+import { authActions } from "../../actions";
 
 const Header = (props) => {
   return (
@@ -20,16 +20,20 @@ const Header = (props) => {
           <li className="nav-item">
             <Link className="nav-link" to="/server-list">Server</Link>
           </li>
-          <li>
-            <a className="nav-link" href="#" onClick={props.logout}>Logout</a>
-          </li>
+          { props.loggedIn ? 
+              <li><a className="nav-link" href="#" onClick={props.logout}>Logout</a></li> :
+              ''
+          }
         </ul>
       </div>
     </nav>
   );
 };
 
+const mapState = state => ({
+  loggedIn: state.auth.loggedIn
+})
 const mapActions = {
   logout: authActions.logout
 }
-export default connect(null, mapActions)(Header);
+export default connect(mapState, mapActions)(Header);

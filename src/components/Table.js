@@ -2,9 +2,13 @@ import React from "react";
 
 
 const Table = ({data}) => {
-    if(!data || data.length<1)
+    if(!data)
         return <div>TableError</div>
-    
+    if(data.constructor !== Array)
+        return <div>TableError</div>
+    if(data.length<1)
+        return <div>TableError</div>
+
     const tableHeadings = Object.keys(data[0]);
 
     return (
@@ -21,7 +25,7 @@ const Table = ({data}) => {
                 {
                     data.map(item => 
                         <tr key={item._id}>
-                            {Object.values(item).map(val => <td>{JSON.stringify(val)}</td>)}
+                            {Object.values(item).map(val => <td>{String(val) || JSON.stringify(val)}</td>)}
                         </tr>
                     )
                 }

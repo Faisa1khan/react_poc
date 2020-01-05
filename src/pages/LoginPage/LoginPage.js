@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
-import Login from "../Login";
+import Login from "../../components/Login";
 
-import {authActions} from "../../actions";
+import { authActions } from "../../actions";
 
 const style = {
     flex: '1',

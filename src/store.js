@@ -19,7 +19,7 @@ const store = createStore(
   applyMiddleware(
     faishMiddleware,
     thunkMiddleware,
-    loggerMiddleware
+    loggerMiddleware        // log all actions
     )
 );
 

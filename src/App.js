@@ -9,12 +9,12 @@ import { history } from "./utils";
 
 // components
 import Container from "./components/Container";
-import Header from "./components/Header";
+import Header from "./components/Header/Header";
 import PrivateRoute from "./components/privateRoute"
 
 // pages
-import LoginPage from "./components/pages/LoginPage";
-import ListingPage from "./components/pages/ListingPage";
+import LoginPage from "./pages/LoginPage/LoginPage";
+import ListingPage from "./pages/ListingPage/ListingPage";
 
 function App() {
   return (

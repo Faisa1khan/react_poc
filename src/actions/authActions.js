@@ -36,7 +36,7 @@ function login(email, password){
     }
     function request(){return {type: authConstants.LOGIN_REQUEST}}
     function success(){return {type: authConstants.LOGIN_SUCCESS}}
-    function failure(error){return {type: authConstants.LOGIN_FAILURE, error}}
+    function failure(error){return {type: authConstants.LOGIN_FAILURE, payload: {error}}}
 }
 
 function logout(){
