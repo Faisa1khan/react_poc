@@ -7,7 +7,7 @@ import { Provider } from "react-redux";
 import "./index.css";
 
 import 'bootstrap/dist/css/bootstrap.css';
-
+import 'bootstrap/dist/js/bootstrap.js';
 
 import "./i18n";
 
