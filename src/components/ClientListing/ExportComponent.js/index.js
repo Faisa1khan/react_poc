@@ -37,7 +37,7 @@ function ExportComponent(props) {
                 <DropdownButton  title='Simple Export'>
                    <ul className="drop-down-list"> 
                     {
-                        ['CSV','Excel','JSON'].map((type)=>{
+                        ['CSV','JSON'].map((type)=>{
                             return(
                            
                                 <CSVLink headers={headers} key={type} data={props.filtered_data}>{type}</CSVLink>
@@ -53,7 +53,7 @@ function ExportComponent(props) {
                 <DropdownButton title='Bulk Export'>
                 <ul  className="drop-down-list">
                 {
-                        ['CSV','Excel','JSON'].map((type)=>{
+                        ['CSV','JSON'].map((type)=>{
                             return(
                            
                                

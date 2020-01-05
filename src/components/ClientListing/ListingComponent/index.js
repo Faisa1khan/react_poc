@@ -13,6 +13,9 @@ function getPageItems(data,context)
     return data.slice(context.firstItemIndex,context.lastItemIndex+1)
 }
 
+
+//Create a context for user object passed in details component as it will be used in modal component as well
+
 function ListingComponent({filter,filtered_data,attributes,paginationContext}) {
     return(
         <Table >
@@ -44,7 +47,7 @@ function ListingComponent({filter,filtered_data,attributes,paginationContext}) {
                                             typeof(item[attr])!=='object'?
                                                 item[attr]
                                             :
-                                            <DetailsSection details={item[attr]} />
+                                            <DetailsSection user={item} details={item[attr]} />
                                                 
                                         }
                                     </td>

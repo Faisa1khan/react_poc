@@ -1,6 +1,7 @@
 import React from 'react';
+import ModalView from '../../../generics/Modal';
 
-function DetailsSection({details}) {
+function DetailsSection({details,user}) {
     return(
         <div>
             
@@ -11,6 +12,7 @@ function DetailsSection({details}) {
                     )
                 })
             } 
+            <ModalView header={`More details about ${user.name}`} user={user} btnText='Show More' />
         </div>
     )
 }
