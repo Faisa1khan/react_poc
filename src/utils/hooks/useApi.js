@@ -1,12 +1,10 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import APIService from "../apiService/APIService";
 // custom hook for performing GET request
 
-console.log(APIService["getPeople"], APIService.getPeople);
 export function useApi(method, ...params) {
   // ---- State
-  const [data, setData] = useState(null);
+  const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 

@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
-import axios from "axios";
-import endpoint from "../endpoint";
 import { useDebounce } from "../utils/hooks/useDebounce";
 import Lists from "./listing/Lists";
 import ListHeader from "./listing/ListHeader";
@@ -15,28 +13,41 @@ const ServerPagination = () => {
   const [pageSize, setPageSize] = useState(10);
   const [searchInput, setSearchInput] = useState("");
   const input = useDebounce(searchInput, 500); // debounce input value
-  const [data, setData] = useState([]);
-  const [result, isLoading, error, fetchData] = useApi("getPeople");
+  const [data, isLoading, error, fetchData] = useApi("getPeople", {
+    q: input,
+    _page: currentPage,
+    _limit: pageSize,
+    _sort: sortBy,
+    _order: sortOrder
+  });
 
   // console.log(result);
-  console.log(result, isLoading, fetchData());
+  console.log("Being render");
 
   // Effect for API call
+  // useEffect(() => {
+  //   console.log("i was called");
+  //   axios
+  //     .get(endpoint + "people", {
+  //       params: {
+  //         q: input,
+  //         _page: currentPage,
+  //         _limit: pageSize,
+  //         _sort: sortBy,
+  //         _order: sortOrder
+  //       }
+  //     })
+  //     .then(response => setData(response.data))
+  //     .catch(error => console.error(error));
+  // }, [currentPage, pageSize, sortBy, sortOrder, input]);
+
   useEffect(() => {
-    console.log("i was called");
-    axios
-      .get(endpoint + "people", {
-        params: {
-          q: input,
-          _page: currentPage,
-          _limit: pageSize,
-          _sort: sortBy,
-          _order: sortOrder
-        }
-      })
-      .then(response => setData(response.data))
-      .catch(error => console.error(error));
+    fetchData();
   }, [currentPage, pageSize, sortBy, sortOrder, input]);
+
+  if (error) {
+    return <p>{error}</p>;
+  }
 
   return (
     <Container>
@@ -48,7 +59,11 @@ const ServerPagination = () => {
         setPageSize={setPageSize}
         pageSize={pageSize}
       />
-      <Lists data={data} setSortBy={setSortBy} />
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        <Lists data={data} setSortBy={setSortBy} />
+      )}
       <ListFooter pageSize={pageSize} setCurrentPage={setCurrentPage} />
     </Container>
   );

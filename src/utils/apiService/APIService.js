@@ -1,16 +1,11 @@
 import API from "./API";
 
 const APIService = {
-  getPeople: async () => {
-    try {
-      API.get("people").then(data => console.log(data));
-    } catch (e) {
-      console.log(e);
-    } finally {
-    }
+  getPeople: async params => {
+    return API.get("people", { params }).then(res => res.data);
   },
 
-  loadUsersById: async id => {
+  getPeopleById: async id => {
     // ajax magic
   }
 };
