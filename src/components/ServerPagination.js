@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container } from "react-bootstrap";
+import { Container, Spinner, Button } from "react-bootstrap";
 import { useDebounce } from "../utils/hooks/useDebounce";
 import Lists from "./listing/Lists";
 import ListHeader from "./listing/ListHeader";
@@ -13,6 +13,7 @@ const ServerPagination = () => {
   const [pageSize, setPageSize] = useState(10);
   const [searchInput, setSearchInput] = useState("");
   const input = useDebounce(searchInput, 500); // debounce input value
+
   const [data, isLoading, error, fetchData] = useApi("getPeople", {
     q: input,
     _page: currentPage,
@@ -24,34 +25,19 @@ const ServerPagination = () => {
   // console.log(result);
   console.log("Being render");
 
-  // Effect for API call
-  // useEffect(() => {
-  //   console.log("i was called");
-  //   axios
-  //     .get(endpoint + "people", {
-  //       params: {
-  //         q: input,
-  //         _page: currentPage,
-  //         _limit: pageSize,
-  //         _sort: sortBy,
-  //         _order: sortOrder
-  //       }
-  //     })
-  //     .then(response => setData(response.data))
-  //     .catch(error => console.error(error));
-  // }, [currentPage, pageSize, sortBy, sortOrder, input]);
-
   useEffect(() => {
     fetchData();
   }, [currentPage, pageSize, sortBy, sortOrder, input]);
 
   if (error) {
-    return <p>{error}</p>;
+    console.warn(JSON.stringify(error));
+    return <p>{error.message}</p>;
   }
 
   return (
     <Container>
       <ListHeader
+        data={data}
         searchInput={searchInput}
         setSearchInput={setSearchInput}
         setSortOrder={setSortOrder}
@@ -60,7 +46,16 @@ const ServerPagination = () => {
         pageSize={pageSize}
       />
       {isLoading ? (
-        <p>Loading...</p>
+        <Button variant="primary" disabled className="mb-2">
+          <Spinner
+            as="span"
+            animation="grow"
+            size="sm"
+            role="status"
+            aria-hidden="true"
+          />
+          Loading...
+        </Button>
       ) : (
         <Lists data={data} setSortBy={setSortBy} />
       )}

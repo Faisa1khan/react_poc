@@ -1,14 +1,15 @@
 import React from "react";
 import { Col, Form } from "react-bootstrap";
+import { ExportCSV } from "./ExportCSV";
 // import styles from "./ListHeader.module.css";
 
 // console.log(styles);
-
 const ListHeader = ({
   searchInput,
   setSearchInput,
   setSortBy,
-  setPageSize
+  setPageSize,
+  data
 }) => {
   return (
     <Form.Row className="mt-4">
@@ -22,7 +23,7 @@ const ListHeader = ({
 
       <Form.Group
         as={Col}
-        lg={{ span: 2, offset: 6 }}
+        lg={{ span: 2, offset: 5 }}
         controlId="formGridState"
       >
         <Form.Label>Sort by</Form.Label>
@@ -46,6 +47,10 @@ const ListHeader = ({
           <option value="30">30</option>
           <option value="100">All</option>
         </Form.Control>
+      </Form.Group>
+      <Form.Group as={Col} lg="1" controlId="formGridState">
+        <Form.Label>Data</Form.Label>
+        <ExportCSV csvData={data} fileName="demo" />
       </Form.Group>
     </Form.Row>
   );
