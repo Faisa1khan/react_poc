@@ -67,12 +67,12 @@ const data=[
 const getKeywordSearchResult=(current_data,default_data,keyword,attr)=>{
     
     // if() return default_data 
-    if(keyword==null || keyword.length==0 || attr==null) return default_data
+    if(keyword===null || keyword.length===0 || attr===null) return default_data
     return default_data.filter((item)=>{return (_.get(item,attr.split('.')).toLowerCase()).includes(keyword.toLowerCase())})
 }
 
 const sortByAttribute=(data,attr,asc)=>{
-    if(data.length==0 || asc===null || attr===null) return data
+    if(data.length===0 || asc===null || attr===null) return data
     return [...data].sort((a,b)=>{ // Here a deep copy has been created for data otherwise it will get mutated
         if(asc===true)
             return _.get(a,attr.split('.'))-_.get(b,attr.split('.'))
@@ -83,9 +83,13 @@ const sortByAttribute=(data,attr,asc)=>{
     
 }
 
+//Modify this for multiple attributes
 const getDataByAttributeValue=(data,attr,attrValue)=>{
-    if(data.length==0 || attrValue===null || attr===null) return data
-    return data.filter((item)=>{return _.get(item,attr.split('.'))==attrValue})
+    
+    //Will return results for a single attribute only    
+    if(data.length===0 || attrValue===null || attr===null) return data
+    // let resultData=data
+    return data.filter((item)=>{return _.get(item,attr.split('.'))===attrValue})
 }
 
 const getFilteredData=(current_data,default_data,filter)=>{

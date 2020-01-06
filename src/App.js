@@ -8,8 +8,13 @@ import Header from "./components/header";
 import { BrowserRouter, Route } from "react-router-dom";
 import ClientListing from "./components/ClientListing";
 import AuthComponent from "./components/AuthComponent";
+import ImageUploadComponent from "./components/ImageUploadComponent";
+import DataVis from "./components/DataVis";
 
 function App() {
+
+  
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -27,6 +32,9 @@ function App() {
         <Route exact path="/client-list" component={ClientListing} />
         <Route exact path="/server-list" render={() => <div>server</div>} />
         <Route exact path="/auth" component={AuthComponent} />
+        <Route exact path='/profile' component={ImageUploadComponent} />
+        <Route exact path='/data-vis-demo' component={DataVis}/>
+
       </BrowserRouter>
     </div>
   );

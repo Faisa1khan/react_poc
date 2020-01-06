@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {Table} from 'react-bootstrap'
 import DetailsSection from './DetailComponent';
 
-{
+ 
     /*
         Taking data and column names attributes as props
     */
-}
+ 
 
 function getPageItems(data,context)
 {
@@ -26,7 +26,7 @@ function ListingComponent({filter,filtered_data,attributes,paginationContext}) {
                 attributes.map((item,index)=>{
                     return(
                     <th key={index}>
-                        {item=='ctc'?<span>CTC<span>
+                        {item==='ctc'?<span>CTC<span>
                              
                         </span></span>:item}
                     </th>

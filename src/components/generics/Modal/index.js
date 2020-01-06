@@ -18,7 +18,12 @@ function ModalView({btnText,header,user}) {
                    {header}
                </Modal.Header>
                <Modal.Body>
-                {JSON.stringify(user)}
+                {
+                    Object.keys(user.details).map((user_prop)=>{
+                    return(
+                    <p>{user_prop} : {user.details[user_prop]}</p>
+                    )
+                })  }
                </Modal.Body>
                <Modal.Footer>
                     <Button onClick={()=>handleClose()}>Close</Button>

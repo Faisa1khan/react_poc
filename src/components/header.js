@@ -15,8 +15,14 @@ const Header = () => {
       <Nav.Link as={Link} to='/server-list'>
         Server
       </Nav.Link>
+      <Nav.Link as={Link} to='/profile'>
+        Profile
+      </Nav.Link>
       <Nav.Link as={Link} to='/auth'>
         Login
+      </Nav.Link>
+      <Nav.Link as={Link} to='/data-vis-demo'>
+        Data Vis
       </Nav.Link>
     </Nav>
   );
