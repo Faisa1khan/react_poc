@@ -14,10 +14,9 @@ export function useApi(method, ...params) {
     try {
       setIsLoading(true);
       setData(await APIService[method](...params));
+      setIsLoading(false);
     } catch (e) {
       setError(e);
-    } finally {
-      setIsLoading(false);
     }
   };
 

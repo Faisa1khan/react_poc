@@ -1,6 +1,6 @@
 import React from "react";
 import { Table } from "react-bootstrap";
-
+import List from "./List";
 const Lists = ({ data, setSortBy }) => {
   return (
     <Table striped bordered hover>
@@ -13,13 +13,8 @@ const Lists = ({ data, setSortBy }) => {
         </tr>
       </thead>
       <tbody>
-        {data.map(({ name, username, email, address }) => (
-          <tr key={username}>
-            <td>{name}</td>
-            <td>{username}</td>
-            <td>{email}</td>
-            <td>{address.city}</td>
-          </tr>
+        {data.map(userdata => (
+          <List key={userdata.username} userdata={userdata} />
         ))}
       </tbody>
     </Table>
