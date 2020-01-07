@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import { authActions } from "../../actions";
 
 const Header = (props) => {
+  const loggedIn = props.loggedIn || true;
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <a className="navbar-brand" href="#">Navbar</a>
@@ -20,9 +22,14 @@ const Header = (props) => {
           <li className="nav-item">
             <Link className="nav-link" to="/server-list">Server</Link>
           </li>
-          { props.loggedIn ? 
-              <li><a className="nav-link" href="#" onClick={props.logout}>Logout</a></li> :
-              ''
+          {loggedIn && 
+              <li><a className="nav-link" href="#" onClick={props.logout}>Logout</a></li> 
+          }
+          {loggedIn &&
+              <Link className="nav-link" to="/profile">Profile</Link>
+          }
+          {loggedIn && 
+            <Link className="nav-link" to="/visual">Visual</Link>
           }
         </ul>
       </div>

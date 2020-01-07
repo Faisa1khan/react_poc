@@ -3,8 +3,10 @@ import XLSX from 'xlsx';
 import FileSaver from 'file-saver';
 //import { Button } from "../../components/commons";
 
+//import { usePrevious } from "../../components/";
+
 // enums
-const format = {
+const formatType = {
     XLSX: 'xlsx',
     CSV: 'csv'
 };
@@ -54,23 +56,23 @@ export default function ExportBar(props){
         console.log(e.target.getAttribute('data-format-type'));
         // normal excel export
         if( e.target.getAttribute('data-export-type') === exportType.NORMAL && 
-            e.target.getAttribute('data-format-type') === format.XLSX){   
-                exportData(data, format.XLSX);
+            e.target.getAttribute('data-format-type') === formatType.XLSX){   
+                exportData(data, formatType.XLSX);
         }
         // normal csv export
         if( e.target.getAttribute('data-export-type') === exportType.NORMAL && 
-            e.target.getAttribute('data-format-type') === format.CSV){   
-                exportData(data, format.CSV);
+            e.target.getAttribute('data-format-type') === formatType.CSV){   
+                exportData(data, formatType.CSV);
         }
         // bulk excel export
         if( e.target.getAttribute('data-export-type') === exportType.BULK && 
-            e.target.getAttribute('data-format-type') === format.XLSX){  
-                exportData(bulkData, format.XLSX);
+            e.target.getAttribute('data-format-type') === formatType.XLSX){  
+                exportData(bulkData, formatType.XLSX);
         }
         // bulk csv export
         if( e.target.getAttribute('data-export-type') === exportType.BULK && 
-            e.target.getAttribute('data-format-type') === format.CSV){  
-                exportData(bulkData, format.CSV);
+            e.target.getAttribute('data-format-type') === formatType.CSV){  
+                exportData(bulkData, formatType.CSV);
         }
     }
 
@@ -81,8 +83,8 @@ export default function ExportBar(props){
                     Export
                 </button>
                 <div class="dropdown-menu" aria-labelledby="export-bar-export-btn">
-                    <a class="dropdown-item" data-format-type={format.XLSX} data-export-type={exportType.NORMAL} href="#">Excel</a>
-                    <a class="dropdown-item" data-format-type={format.CSV} data-export-type={exportType.NORMAL} href="#">CSV</a>
+                    <a class="dropdown-item" data-format-type={formatType.XLSX} data-export-type={exportType.NORMAL} href="#">Excel</a>
+                    <a class="dropdown-item" data-format-type={formatType.CSV} data-export-type={exportType.NORMAL} href="#">CSV</a>
                 </div>
             </div>
             <div class="dropdown bulk-export ml-2" onClick={handleChange}>
@@ -90,8 +92,8 @@ export default function ExportBar(props){
                     Bulk Export
                 </button>
                 <div class="dropdown-menu" aria-labelledby="export-bar-bulk-export-btn">
-                    <a class="dropdown-item" data-format-type={format.XLSX} data-export-type={exportType.BULK} href="#">Excel</a>
-                    <a class="dropdown-item" data-format-type={format.CSV} data-export-type={exportType.BULK} href="#">CSV</a>
+                    <a class="dropdown-item" data-format-type={formatType.XLSX} data-export-type={exportType.BULK} href="#">Excel</a>
+                    <a class="dropdown-item" data-format-type={formatType.CSV} data-export-type={exportType.BULK} href="#">CSV</a>
                 </div>
             </div>
         </div>

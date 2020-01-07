@@ -15,6 +15,8 @@ import PrivateRoute from "./components/privateRoute"
 // pages
 import LoginPage from "./pages/LoginPage/LoginPage";
 import ListingPage from "./pages/ListingPage/ListingPage";
+import ProfilePage from "./pages/ProfilePage/ProfilePage";
+import VisualDashboard from "./pages/VisualDashboard";
 
 function App() {
   return (
@@ -28,6 +30,12 @@ function App() {
             </Route>
             <PrivateRoute exact path="/client-list">
               <ListingPage />
+            </PrivateRoute>
+            <PrivateRoute exact path="/profile">
+              <ProfilePage />
+            </PrivateRoute>
+            <PrivateRoute exact path="/visual">
+              <VisualDashboard />
             </PrivateRoute>
             <PrivateRoute exact path="/server-list" render={() => <div>server</div>} >
             </PrivateRoute>

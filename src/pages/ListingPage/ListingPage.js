@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-//import { usePrevious } from "../../components/customHooks";
 import { connect } from "react-redux";
 
 import Table from "../../components/Table";
