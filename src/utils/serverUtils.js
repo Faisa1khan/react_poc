@@ -13,6 +13,8 @@ const getUsers=(async ()=>{
     }
 })()
 
+
+
 const getLocations=(async ()=>{
     try {
         return await axios.get('http://www.mocky.io/v2/5e0d99d53300004d00aa8712')
