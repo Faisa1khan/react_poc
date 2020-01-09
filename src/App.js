@@ -9,6 +9,7 @@ import ServerPagination from "./components/ServerPagination";
 import { useAuth } from "./utils/hooks/useAuth";
 import ImageCropper from "./components/UploadData/ImageUpload";
 import Demo from "./components/HighCharts/demo";
+import Chart from "./components/HighCharts/Charts";
 function App() {
   const { auth, signin } = useAuth();
   return (
@@ -17,7 +18,13 @@ function App() {
         <div className="App">
           <Header />
           <Route exact path="/" render={() => <div>Home</div>} />
-          <Route exact path="/client-side" component={Demo} />
+          <Route
+            exact
+            path="/client-side"
+            render={() => <div>Client Side</div>}
+          />
+          <Route exact path="/word-cloud" component={Demo} />
+          <Route exact path="/chart" component={Chart} />
           <Route exact path="/server-side" component={ServerPagination} />
           <Route exact path="/upload-image" component={ImageCropper} />
         </div>

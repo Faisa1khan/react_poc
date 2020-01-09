@@ -5,8 +5,14 @@ import Lists from "./listing/Lists";
 import ListHeader from "./listing/ListHeader";
 import ListFooter from "./listing/Pagination";
 import { useApi } from "../utils/hooks/useApi";
+import { connect } from "react-redux";
+import fetchDataUsingApi from "../actionCreator/fetchDataMiddleware";
+import { bindActionCreators } from "redux";
 
-const ServerPagination = () => {
+// import { getDataPending, getDataError, getData } from "../reducers/FetchData";
+
+const ServerPagination = props => {
+  console.log(props.data);
   const [sortBy, setSortBy] = useState("name");
   const [sortOrder, setSortOrder] = useState("asc");
   const [currentPage, setCurrentPage] = useState(1);
@@ -25,9 +31,14 @@ const ServerPagination = () => {
   // console.log(result);
   console.log("Being render");
 
+  // useEffect(() => {
+  //   fetchData();
+  //   fetchDataUsingApi();
+  // }, [currentPage, pageSize, sortBy, sortOrder, input]);
+
   useEffect(() => {
-    fetchData();
-  }, [currentPage, pageSize, sortBy, sortOrder, input]);
+    props.fetchProducts();
+  }, []);
 
   if (error) {
     console.warn(JSON.stringify(error));
@@ -64,4 +75,18 @@ const ServerPagination = () => {
   );
 };
 
-export default ServerPagination;
+const mapStateToProps = state => ({
+  error: state.FetchData.error,
+  data: state.FetchData.data,
+  pending: state.FetchData.pending
+});
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      fetchProducts: fetchDataUsingApi
+    },
+    dispatch
+  );
+
+export default connect(mapStateToProps, mapDispatchToProps)(ServerPagination);
