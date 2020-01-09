@@ -3,7 +3,7 @@ import HighCharts from 'highcharts'
 import { getFormattedData } from '../visUtils';
 
 
-function LineChart({data,title,xTitle,yTitle}) {
+function LineChart({data,title,xTitle,yTitle,seriesName}) {
 
     useEffect(()=>{
         HighCharts.chart('container-line',{
@@ -27,7 +27,7 @@ function LineChart({data,title,xTitle,yTitle}) {
             },
             series:[
                 {
-                    name: 'asdsa',              
+                    name:seriesName,              
                     data:Object.values(data)
                 } 
             ]

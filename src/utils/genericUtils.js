@@ -20,20 +20,25 @@ const getAttributeCount=(arr,attr,case_sensitive)=>{
     let attr_count={}
     arr.map((item)=>{
         let val=_.get(item,attr.split('.'))
-        if(case_sensitive)
+         
+        if(val)
         {
-            val=val.toLowerCase()
-        }
-        
-        if(attr_count[val]==undefined)
-        {
+            if(case_sensitive && typeof(val)==='string') val=val.toLowerCase()            
             
-            attr_count[val]=1
+            if(attr_count[val]==undefined) attr_count[val]=1
+            else attr_count[val]+=1
         }
-        else
-        {
-            attr_count[val]+=1
+        else{
+            if(attr_count['Others']==undefined)
+            {
+                attr_count['Others']=1
+            }
+            else
+            {
+                attr_count['Others']+=1
+            }
         }
+         
     })
     return attr_count
 }
@@ -77,6 +82,27 @@ const getMinAttributeValue=(data,attr)=>{
 }
 
 
+//Works for object only 
+const getFlattenedData=(data,newData)=>{
+  
+    
+     
+    Object.keys(data).map((key)=>{
+        if(typeof(data[key])=='object' && data[key].length==undefined){
+            getFlattenedData(data[key],newData)
+        }
+        else if(typeof(data[key])=='object' && data[key].length!==undefined)
+        {
+           newData[key]=data[key].length
+        }
+        else
+        {
+            newData[key]=data[key]
+        }
+         
+    })
+}
+
  
 
-module.exports={getAttributeCount,getAttributeList,getAttributeListMod,getMaxAttributeValue,getMinAttributeValue}
+module.exports={getFlattenedData,getAttributeCount,getAttributeList,getAttributeListMod,getMaxAttributeValue,getMinAttributeValue}

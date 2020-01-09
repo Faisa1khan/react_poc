@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Highcharts from 'highcharts'
 
-function BarChart({data,title,xTitle,yTitle}) {
+function BarChart({data,title,xTitle,yTitle,seriesName}) {
     useEffect(()=>{
         Highcharts.chart('container-bar',{
             chart:{
@@ -22,6 +22,7 @@ function BarChart({data,title,xTitle,yTitle}) {
                     text:yTitle
             }},
             series:[{
+                name:seriesName,
                 data:Object.values(data) 
             }]
         })

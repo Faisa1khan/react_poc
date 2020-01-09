@@ -1,9 +1,13 @@
 import axios from 'axios'
-import { SET_DATA, SET_ACTIVE_PAGE, SET_ITEMS_PER_PAGES,SET_FILTER,SET_FILTERED_DATA} from '../constants'
+import { SET_DATA, SET_ACTIVE_PAGE, SET_ITEMS_PER_PAGES,SET_FILTER,SET_FILTERED_DATA, SET_MODE} from '../constants'
 import {  getFilteredData } from '../utils/FilterUtil'
 
 const setData=(data)=>{
     return {type:SET_DATA,payload:data}
+}
+
+const setMode=(mode)=>{
+    return {type:SET_MODE,payload:mode}
 }
 
 const setActivePage=(page)=>{
@@ -21,7 +25,7 @@ const setItemsPerPage=(items)=>{
 
 const getData=()=>{
     return dispatch=>{
-        axios.get('https://next.json-generator.com/api/json/get/Vyh1CuLJ_')
+        axios.get('https://next.json-generator.com/api/json/get/NJxAQn8J_')
         .then((res)=>{
             dispatch(setData(res.data))
             dispatch({type:SET_FILTERED_DATA,payload:res.data})
@@ -48,5 +52,5 @@ const setFilteredData=(current_data,default_data,filter)=>{
      }
 }
 
-export {getData,setActivePage,setItemsPerPage,setFilteredData}
+export {getData,setActivePage,setItemsPerPage,setFilteredData,setMode}
 

@@ -30,6 +30,8 @@ function FilterComponent(props) {
 
     const setOrder=(attr,mode)=>{
         setFilter({...filter,order:{...filter.order,by:attr,mode:mode}})
+        
+
     }
 
     const setAttrValue=(name,value)=>{

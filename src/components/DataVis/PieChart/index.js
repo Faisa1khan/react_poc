@@ -2,8 +2,10 @@ import React, { useEffect } from 'react';
 import Highcharts from 'highcharts'
 
 
-function PieChart({title,data,xTitle,yTitle}) {
+function PieChart({title,data,xTitle,yTitle,seriesName}) {
+    
     useEffect(()=>{
+        
             Highcharts.chart('container',{
                 chart:{
                     type:'pie'
@@ -21,8 +23,8 @@ function PieChart({title,data,xTitle,yTitle}) {
                     title:yTitle
                 },
                 series:[{
-                    
-                    data:Object.values(data)
+                    name:seriesName,
+                    data:Object.keys(data).map((key)=>{return {name:key,y:data[key]}})
                 }]
             })
     },[data])

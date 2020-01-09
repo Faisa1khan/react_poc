@@ -3,4 +3,5 @@ export const SET_FILTER='SET_FILTER'
 export const SET_DATA='SET_DATA'
 export const SET_ACTIVE_PAGE='SET_ACTIVE_PAGE' 
 export const SET_FILTERED_DATA='SET_FILTERED_DATA'
+export const SET_MODE='SET_MODE'
  
