@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Highcharts from "highcharts";
 
-export function PiChart({divID, title, category, data}){ // divID unique
+export function PiChart({divID, title, category, seriesData}){ // divID unique
     useEffect(() => {
         Highcharts.chart(divID, {
             chart: {
@@ -12,10 +12,10 @@ export function PiChart({divID, title, category, data}){ // divID unique
             },
             series: [{
                 name: category,
-                data: data
+                data: seriesData
             }]
         });
-    }, [data]);
+    }, [seriesData]);
 
     if(!divID)
         return (<div></div>);

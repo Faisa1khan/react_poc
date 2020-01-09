@@ -7,6 +7,7 @@ import "./pagination.scss";
 import Search from "../../components/Search";
 import FilterBar from "./FilterBar";
 import ExportBar from "./ExportBar";
+import { Loader } from "../../components/commons";
 
 import { listingActions } from "../../actions";
 
@@ -64,7 +65,7 @@ const ListingPage = (props) => {
 
     // render
     if(flags.loading)
-        return (<div>Loading...</div>)
+        return (<Loader/>);
     
     return (
         <div className="listing-page">

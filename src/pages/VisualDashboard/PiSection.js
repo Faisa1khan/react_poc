@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { PiChart } from "../../components/charts"; 
+import { genTagIDForChart } from "../../utils";
 
 // takes array of data & returns percentages of a sepecif property
 const getFrequency = (items, property) => {
@@ -57,18 +58,20 @@ export default function PiSection(props){  // set once initially
                 <option value={'gender'}>Gender</option>
             </select>
         </div>
-        <div className="chart">
-            {seriesData && category==='country' && (<PiChart 
-                divID={'pi-chart1'}
-                title={'Employees by location'}
-                category={category}
-                data={seriesData}
+        <div className="pi-chart">
+            {seriesData && category==='country' && (
+                <PiChart 
+                    divID={genTagIDForChart()}
+                    title={'Employees by location'}
+                    category={category}
+                    seriesData={seriesData}
                 />)}
-            {seriesData && category==='gender' && (<PiChart 
-                divID={'pi-chart1'}
-                title={'Employees by Gender'}
-                category={category}
-                data={seriesData}
+            {seriesData && category==='gender' && (
+                <PiChart 
+                    divID={genTagIDForChart()}
+                    title={'Employees by Gender'}
+                    category={category}
+                    seriesData={seriesData}
                 />)}
         </div>
         </Fragment>
