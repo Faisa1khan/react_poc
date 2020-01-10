@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { Container, Spinner, Button } from "react-bootstrap";
 import { useDebounce } from "../utils/hooks/useDebounce";
 import Lists from "./listing/Lists";
@@ -8,37 +8,30 @@ import { useApi } from "../utils/hooks/useApi";
 import { connect } from "react-redux";
 import fetchDataUsingApi from "../actionCreator/fetchDataMiddleware";
 import { bindActionCreators } from "redux";
-
-// import { getDataPending, getDataError, getData } from "../reducers/FetchData";
-
+import { fetchDataDetails } from "../actionCreator";
 const ServerPagination = props => {
-  console.log(props.data);
-  const [sortBy, setSortBy] = useState("name");
-  const [sortOrder, setSortOrder] = useState("asc");
-  const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(10);
-  const [searchInput, setSearchInput] = useState("");
-  const input = useDebounce(searchInput, 500); // debounce input value
-
-  const [data, isLoading, error, fetchData] = useApi("getPeople", {
-    q: input,
-    _page: currentPage,
-    _limit: pageSize,
-    _sort: sortBy,
-    _order: sortOrder
+  const [params, setParams] = useState({
+    q: "",
+    _page: 1,
+    _limit: 10,
+    _sort: "name",
+    _order: "asc"
   });
+
+  const queryParams = useMemo(() => params, [params]);
+  const [data, isLoading, error, fetchData] = useApi("getPeople");
 
   // console.log(result);
   console.log("Being render");
 
-  // useEffect(() => {
-  //   fetchData();
-  //   fetchDataUsingApi();
-  // }, [currentPage, pageSize, sortBy, sortOrder, input]);
-
   useEffect(() => {
-    props.fetchProducts();
-  }, []);
+    fetchData(queryParams);
+    props.fetchDataDetails("http://localhost:3000/people", queryParams);
+  }, [queryParams]);
+
+  // useEffect(() => {
+  //   props.fetchProducts();
+  // }, []);
 
   if (error) {
     console.warn(JSON.stringify(error));
@@ -47,15 +40,7 @@ const ServerPagination = props => {
 
   return (
     <Container>
-      <ListHeader
-        data={data}
-        searchInput={searchInput}
-        setSearchInput={setSearchInput}
-        setSortOrder={setSortOrder}
-        setSortBy={setSortBy}
-        setPageSize={setPageSize}
-        pageSize={pageSize}
-      />
+      <ListHeader paramsInput={{ params, setParams }} data={data} />
       {isLoading ? (
         <Button variant="primary" disabled className="mb-2">
           <Spinner
@@ -68,9 +53,9 @@ const ServerPagination = props => {
           Loading...
         </Button>
       ) : (
-        <Lists data={data} setSortBy={setSortBy} />
+        <Lists data={data} paramsInput={{ params, setParams }} />
       )}
-      <ListFooter pageSize={pageSize} setCurrentPage={setCurrentPage} />
+      <ListFooter paramsInput={{ params, setParams }} />
     </Container>
   );
 };
@@ -84,7 +69,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      fetchProducts: fetchDataUsingApi
+      fetchProducts: fetchDataUsingApi,
+      fetchDataDetails
     },
     dispatch
   );

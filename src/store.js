@@ -1,7 +1,8 @@
 import { createStore, applyMiddleware, compose } from "redux";
 import reducer from "./reducers";
 import thunk from "redux-thunk";
-const middlwares = [thunk];
+import apiMiddleware from "./middleware/api";
+const middlwares = [apiMiddleware, thunk];
 
 const store = createStore(
   reducer,
@@ -14,6 +15,5 @@ const store = createStore(
   )
 );
 
-console.log(store);
-
+window.store = store;
 export default store;

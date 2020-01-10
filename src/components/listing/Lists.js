@@ -1,14 +1,15 @@
 import React from "react";
 import { Table } from "react-bootstrap";
 import List from "./List";
-const Lists = ({ data, setSortBy }) => {
+import { useSelector, useDispatch } from "react-redux";
+const Lists = ({ data, setSortBy, paramsInput }) => {
   return (
     <Table striped bordered hover>
       <thead>
         <tr>
           <th>Name</th>
-          <th onClick={() => setSortBy("username")}>Username</th>
-          <th onClick={() => setSortBy("email")}>Email</th>
+          <th>Username</th>
+          <th>Email</th>
           <th>City</th>
         </tr>
       </thead>
