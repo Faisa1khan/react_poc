@@ -83,7 +83,7 @@ const getMinAttributeValue=(data,attr)=>{
 
 
 //Works for object only 
-const getFlattenedData=(data,newData)=>{
+const flattenedData=(data,newData)=>{
   
     
      
@@ -103,6 +103,30 @@ const getFlattenedData=(data,newData)=>{
     })
 }
 
+const getFlattenedData=(data)=>{
+    let newData={}
+    flattenedData(data,newData)
+    return newData
+}
+
+function getFlattenedAO(data) {
+    let newData=[]
+    data.map((item)=>{
+        if(typeof(item)==='object')
+        {
+            
+            let tempData=getFlattenedData(item)
+            newData.push(tempData)
+        }
+        else
+        {
+             
+            newData.push(item)
+        }
+    })
+    return newData
+}
+
  
 
-module.exports={getFlattenedData,getAttributeCount,getAttributeList,getAttributeListMod,getMaxAttributeValue,getMinAttributeValue}
+module.exports={getFlattenedAO,getFlattenedData,getAttributeCount,getAttributeList,getAttributeListMod,getMaxAttributeValue,getMinAttributeValue}

@@ -9,7 +9,7 @@ import {get} from 'lodash'
 import { Container,Row,Col, Spinner, Jumbotron, Button } from 'react-bootstrap';
 import ExportComponent from './ExportComponent.js';
 import VisComponent from './VisComponent';
-import ReportComponent from './ReportComponent';
+import ReportComponent from '../ReportComponent';
 
 
 
