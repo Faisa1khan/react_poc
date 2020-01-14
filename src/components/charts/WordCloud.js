@@ -7,7 +7,7 @@ export function WordCloud({divID, seriesData, name, title}){
     useEffect(() => {
         if(!seriesData)
             return;
-        HighCharts.chart(divID, {
+        const chartRef = HighCharts.chart(divID, {
             title: {
                 text: title
             },
@@ -17,6 +17,9 @@ export function WordCloud({divID, seriesData, name, title}){
                 name: name,
             }]
         });
+        return () => {
+            chartRef.destroy();
+        };
     }, [seriesData]);
     return (
         <div id={divID}>

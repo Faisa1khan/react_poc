@@ -7,7 +7,7 @@ export function BarChart({divID, title, xAxis, yAxis, seriesData}){ // divID uni
         if(!seriesData)
             return;
         console.log(xAxis, yAxis, seriesData);
-        Highcharts.chart(divID, {
+        const chartRef = Highcharts.chart(divID, {
             chart: {
                 type: 'column'
             },
@@ -22,6 +22,11 @@ export function BarChart({divID, title, xAxis, yAxis, seriesData}){ // divID uni
             
             series: seriesData
         });
+
+        // destroy chart on unmount
+        return () => {
+            chartRef.destroy();
+        }
         
     }, [seriesData]);
 

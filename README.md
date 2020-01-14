@@ -1,6 +1,21 @@
-components - listings Component, graph(4+word cloud) Component , report builder Component using pivot table
+# Libraries
 
 
-1) word cloud on alphabets by no of words
+visualization library - highchart
 
-2) pivot table in report builder
+xhr request - axios
+
+xlsx - exporting data to excel/csv
+
+file-saver - for downloading a file on client side
+
+react-image-crop - for cropping a image in UI
+
+react-paginate - UI component for pagination
+
+
+
+// work
+
+have to persist store
+

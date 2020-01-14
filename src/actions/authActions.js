@@ -26,7 +26,7 @@ function login(email, password){
                 if(foundUser.password !== password)
                     return dispatch(failure('password did not matched'));
 
-                dispatch(success());
+                dispatch(success({email}));
                 localStorage.setItem('user', JSON.stringify({
                     token: 'abcdef'
                 }));
@@ -35,7 +35,7 @@ function login(email, password){
             .catch(error => dispatch(failure(error)));
     }
     function request(){return {type: authConstants.LOGIN_REQUEST}}
-    function success(){return {type: authConstants.LOGIN_SUCCESS}}
+    function success(payload){return {type: authConstants.LOGIN_SUCCESS, payload}}
     function failure(error){return {type: authConstants.LOGIN_FAILURE, payload: {error}}}
 }
 

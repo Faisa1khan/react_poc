@@ -3,7 +3,7 @@ import Highcharts from "highcharts";
 
 export function PiChart({divID, title, category, seriesData}){ // divID unique
     useEffect(() => {
-        Highcharts.chart(divID, {
+        const chartRef = Highcharts.chart(divID, {
             chart: {
                 type: 'pie'
             },
@@ -15,6 +15,9 @@ export function PiChart({divID, title, category, seriesData}){ // divID unique
                 data: seriesData
             }]
         });
+        return () => {
+            chartRef.destroy();
+        }
     }, [seriesData]);
 
     if(!divID)

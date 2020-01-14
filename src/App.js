@@ -17,6 +17,7 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import ListingPage from "./pages/ListingPage/ListingPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import VisualDashboard from "./pages/VisualDashboard";
+import DetailPage from "./pages/DetailPage";
 
 function App() {
   return (
@@ -36,6 +37,9 @@ function App() {
             </PrivateRoute>
             <PrivateRoute exact path="/visual">
               <VisualDashboard />
+            </PrivateRoute>
+            <PrivateRoute exact path="/detail">
+              <DetailPage />
             </PrivateRoute>
             <PrivateRoute exact path="/server-list" render={() => <div>server</div>} >
             </PrivateRoute>

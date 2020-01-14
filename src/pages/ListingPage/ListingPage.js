@@ -7,12 +7,13 @@ import "./pagination.scss";
 import Search from "../../components/Search";
 import FilterBar from "./FilterBar";
 import ExportBar from "./ExportBar";
-import { Loader } from "../../components/commons";
+import { Loader, Button } from "../../components/commons";
 
 import { listingActions } from "../../actions";
 
 import { 
-    getPaginatedItems
+    getPaginatedItems,
+    history
 } from "../../utils";
 
 
@@ -83,6 +84,13 @@ const ListingPage = (props) => {
                     <ExportBar 
                         bulkData={data.all}
                         data={paginatedItems}
+                        />
+                </div>
+                <div className="listing-page_other ml-5 d-flex align-items-center">
+                    <Button 
+                        onClick={() => {history.push('/detail')}}
+                        name={'detail'}
+                        bootBtnClass={'btn-danger'}
                         />
                 </div>
             </div>

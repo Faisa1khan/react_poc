@@ -1,13 +1,19 @@
 import { authConstants } from "../constants";
 
-export default function auth(state={}, action){
+const initialState = {
+    email: undefined
+};
+
+export default function auth(state=initialState, action){
     switch(action.type){
         case authConstants.LOGIN_REQUEST:
             return {
                 loggingIn: true
             };
         case authConstants.LOGIN_SUCCESS:
+            const { email } = action.payload;
             return {
+                email,
                 loggedIn: true
             };
         case authConstants.LOGIN_FAILURE:
