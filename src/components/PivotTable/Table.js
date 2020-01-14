@@ -1,13 +1,11 @@
-import React from "react";
-// import { data } from "./Data";
-import AreaChartGraph from "./AreaChart";
-import { Container, Row } from "react-bootstrap";
-import LineChartGrap from "./LineChart";
-import BarChartGraph from "./BarChart";
-import PieChartGraph from "./PieChart";
-import { Brush } from "recharts";
-import { getOcurrence } from "../../utils/getOccurence";
-const demodata = [
+import React, { useState } from "react";
+import ReactDOM from "react-dom";
+import PivotTableUI from "react-pivottable/PivotTableUI";
+import "react-pivottable/pivottable.css";
+import { Container } from "react-bootstrap";
+
+// see documentation for supported input formats
+const data = [
   {
     id: "c738ad07-bbc0-4f34-b73a-fde6b21dad86",
     name: "Adaline Spinka Sr.",
@@ -100,43 +98,17 @@ const demodata = [
   }
 ];
 
-const Chart = ({ data }) => {
-  const renderData = [
-    {
-      name: "We Work",
-      TE: getOcurrence(data, "company", "We Work")
-    },
-    {
-      name: "Google",
-      TE: getOcurrence(data, "company", "Google")
-    },
-    {
-      name: "Go Hive",
-      TE: getOcurrence(data, "company", "Go Hive")
-    },
-    {
-      name: "PWC",
-      TE: getOcurrence(data, "company", "PWC")
-    },
-    {
-      name: "Dafodil",
-      TE: getOcurrence(data, "company", "Dafodil")
-    },
-    {
-      name: "Expedia",
-      TE: getOcurrence(demodata, "company", "Expedia")
-    }
-  ];
+const Table = () => {
+  const [renderdata, setRenderData] = useState(data);
   return (
-    <Container className="mt-3">
-      <Row>
-        <AreaChartGraph data={renderData} />
-        <LineChartGrap data={renderData} />
-        <BarChartGraph data={renderData} />
-        <PieChartGraph />
-        <Brush />
-      </Row>
+    <Container>
+      <PivotTableUI
+        data={renderdata}
+        onChange={s => setRenderData(s)}
+        {...renderdata}
+      />
     </Container>
   );
 };
-export default Chart;
+
+export default Table;

@@ -27,8 +27,8 @@ const BarChartGraph = ({ data }) => {
       <YAxis />
       <Tooltip />
       <Legend />
-      <Bar dataKey="TB" fill="#8884d8" />
-      <Bar dataKey="UB" fill="#82ca9d" />
+      <Bar dataKey="TE" fill="#8884d8" />
+      {/* <Bar dataKey="UB" fill="#82ca9d" /> */}
     </BarChart>
   );
 };

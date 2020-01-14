@@ -12,7 +12,6 @@ const initialState = {
 };
 
 export function FetchData(state = initialState, action) {
-  console.log(action);
   switch (action.type) {
     case FETCH_DATA_PENDING:
       return {

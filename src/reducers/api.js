@@ -6,7 +6,6 @@ import {
 } from "../actionCreator/types";
 
 export default function(state = {}, action) {
-  console.log("action type => ", action.type);
   switch (action.type) {
     case SET_DATA_GET_FROM_API:
       return { data: action.payload };
@@ -25,6 +24,7 @@ export default function(state = {}, action) {
           isLoadingData: false
         };
       }
+
       break;
     default:
       return state;

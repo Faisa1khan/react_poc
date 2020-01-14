@@ -25,7 +25,7 @@ const AreaChartGraph = ({ data }) => {
       <XAxis dataKey="name" />
       <YAxis />
       <Tooltip />
-      <Area type="monotone" dataKey="UB" stroke="#8884d8" fill="#8884d8" />
+      <Area type="monotone" dataKey="TE" stroke="#8884d8" fill="#8884d8" />
     </AreaChart>
   );
 };

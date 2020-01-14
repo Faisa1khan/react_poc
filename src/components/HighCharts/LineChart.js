@@ -10,6 +10,7 @@ import {
 } from "recharts";
 
 const LineChartGrap = ({ data }) => {
+  // const demodata = useSelector(state => state);
   return (
     <>
       <LineChart
@@ -30,11 +31,11 @@ const LineChartGrap = ({ data }) => {
         <Legend />
         <Line
           type="monotone"
-          dataKey="TB"
+          dataKey="TE"
           stroke="#8884d8"
           activeDot={{ r: 8 }}
         />
-        <Line type="monotone" dataKey="UB" stroke="#82ca9d" />
+        {/* <Line type="monotone" dataKey="UB" stroke="#82ca9d" /> */}
       </LineChart>
     </>
   );

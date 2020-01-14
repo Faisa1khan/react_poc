@@ -1,15 +1,17 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useCallback } from "react";
 import { Container, Spinner, Button } from "react-bootstrap";
-import { useDebounce } from "../utils/hooks/useDebounce";
 import Lists from "./listing/Lists";
 import ListHeader from "./listing/ListHeader";
 import ListFooter from "./listing/Pagination";
-import { useApi } from "../utils/hooks/useApi";
 import { connect } from "react-redux";
-import fetchDataUsingApi from "../actionCreator/fetchDataMiddleware";
 import { bindActionCreators } from "redux";
 import { fetchDataDetails } from "../actionCreator";
+import Chart from "./HighCharts/Charts";
 const ServerPagination = props => {
+  console.log(props.data, props.isLoading);
+  const { data = [], isLoading, fetchDataDetails } = props;
+  const [chart, showChart] = useState(false);
+  console.log(chart);
   const [params, setParams] = useState({
     q: "",
     _page: 1,
@@ -19,29 +21,27 @@ const ServerPagination = props => {
   });
 
   const queryParams = useMemo(() => params, [params]);
-  const [data, isLoading, error, fetchData] = useApi("getPeople");
-
-  // console.log(result);
   console.log("Being render");
 
   useEffect(() => {
-    fetchData(queryParams);
-    props.fetchDataDetails("http://localhost:3000/people", queryParams);
+    fetchDataDetails("http://localhost:4000/employee", queryParams);
   }, [queryParams]);
 
-  // useEffect(() => {
-  //   props.fetchProducts();
-  // }, []);
-
-  if (error) {
-    console.warn(JSON.stringify(error));
-    return <p>{error.message}</p>;
-  }
+  // if (error) {
+  //   console.warn(JSON.stringify(error));
+  //   return <p>{error.message}</p>;
+  // }
 
   return (
     <Container>
-      <ListHeader paramsInput={{ params, setParams }} data={data} />
-      {isLoading ? (
+      <ListHeader
+        paramsInput={{ params, setParams, chart, showChart }}
+        data={data}
+      />
+
+      {chart ? (
+        <Chart data={data} />
+      ) : isLoading ? (
         <Button variant="primary" disabled className="mb-2">
           <Spinner
             as="span"
@@ -55,21 +55,19 @@ const ServerPagination = props => {
       ) : (
         <Lists data={data} paramsInput={{ params, setParams }} />
       )}
-      <ListFooter paramsInput={{ params, setParams }} />
+      {!chart && <ListFooter paramsInput={{ params, setParams }} />}
     </Container>
   );
 };
 
 const mapStateToProps = state => ({
-  error: state.FetchData.error,
-  data: state.FetchData.data,
-  pending: state.FetchData.pending
+  data: state.api.data,
+  isLoading: state.api.isLoadingData
 });
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      fetchProducts: fetchDataUsingApi,
       fetchDataDetails
     },
     dispatch

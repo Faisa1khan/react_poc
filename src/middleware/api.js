@@ -39,8 +39,9 @@ const apiMiddleware = ({ dispatch }) => next => action => {
       dispatch(onSuccess(data));
     })
     .catch(error => {
-      dispatch(apiError(error));
-      dispatch(onFailure(error));
+      // dispatch(apiError(error));
+      // dispatch(onFailure(error));
+      console.log("Please start the server");
 
       if (error.response && error.response.status === 403) {
         dispatch(accessDenied(window.location.pathname));

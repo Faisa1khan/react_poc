@@ -10,6 +10,7 @@ import { useAuth } from "./utils/hooks/useAuth";
 import ImageCropper from "./components/UploadData/ImageUpload";
 import Demo from "./components/HighCharts/demo";
 import Chart from "./components/HighCharts/Charts";
+import Table from "./components/PivotTable/Table";
 function App() {
   const { auth, signin } = useAuth();
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route exact path="/chart" component={Chart} />
           <Route exact path="/server-side" component={ServerPagination} />
           <Route exact path="/upload-image" component={ImageCropper} />
+          <Route exact path="/table" component={Table} />
         </div>
       ) : (
         <Auth signin={signin} />
