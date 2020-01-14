@@ -14,7 +14,7 @@ import PrivateRoute from "./components/privateRoute"
 
 // pages
 import LoginPage from "./pages/LoginPage/LoginPage";
-import ListingPage from "./pages/ListingPage/ListingPage";
+import ListingPage from "./pages/ListingPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import VisualDashboard from "./pages/VisualDashboard";
 import DetailPage from "./pages/DetailPage";

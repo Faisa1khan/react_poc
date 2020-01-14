@@ -1,6 +1,10 @@
 import React from "react";
 import XLSX from 'xlsx';
 import FileSaver from 'file-saver';
+import { 
+    stringToArrayBuffer as s2ab,
+    makeWB
+} from "../../utils";
 //import { Button } from "../../components/commons";
 
 //import { usePrevious } from "../../components/";
@@ -15,31 +19,10 @@ const exportType = {
     NORMAL: 'normal'
 };
 
-function s2ab(s){
-    const buf = new ArrayBuffer(s.length);
-    const view = new Uint8Array(buf);
-    for (let i=0 ; i<s.length ; i++)
-        view[i] = s.charCodeAt(i) & 0xFF;
-    return buf;
-}
 
 export default function ExportBar(props){
     const { bulkData, data } = props;
 
-    const makeWB = (data) => {   // make work book
-        const wb = XLSX.utils.book_new();  // new book
-        wb.Props = {
-            Title: 'Table',
-            Subject: 'Listings',
-            Author: '',
-            CreatedDate: new Date()
-        };
-        wb.SheetNames.push('Sheet1');  // new sheet in work book
-        const ws_data = data;
-        const ws = XLSX.utils.json_to_sheet(ws_data);  // convert data to excel sheet
-        wb.Sheets['Sheet1'] = ws;
-        return wb;
-    } 
     const downloadOnClient = (wbout, extension) => {   // download the excel/csv sheet
         const blob = new Blob([s2ab(wbout)], {type:"application/octet-stream"});
         FileSaver.saveAs(blob, `listings.${extension}`);
@@ -48,7 +31,7 @@ export default function ExportBar(props){
         if(!data)
             return;
         
-        const wb = makeWB(data);
+        const wb = makeWB(data, 'sheet1');
         const wbout = XLSX.write(wb, {bookType: format, type: 'binary'});
         downloadOnClient(wbout, format);
     }

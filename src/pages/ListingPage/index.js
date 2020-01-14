@@ -7,6 +7,7 @@ import "./pagination.scss";
 import Search from "../../components/Search";
 import FilterBar from "./FilterBar";
 import ExportBar from "./ExportBar";
+import ZipAll from "./ZipAll";
 import { Loader, Button } from "../../components/commons";
 
 import { listingActions } from "../../actions";
@@ -85,6 +86,7 @@ const ListingPage = (props) => {
                         bulkData={data.all}
                         data={paginatedItems}
                         />
+                    <ZipAll />
                 </div>
                 <div className="listing-page_other ml-5 d-flex align-items-center">
                     <Button 
