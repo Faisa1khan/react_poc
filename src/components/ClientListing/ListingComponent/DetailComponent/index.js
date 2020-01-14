@@ -1,5 +1,6 @@
 import React from 'react';
 import ModalView from '../../../generics/Modal';
+import { Button } from 'react-bootstrap';
 
 function DetailsSection({details,user}) {
     return(
@@ -12,7 +13,12 @@ function DetailsSection({details,user}) {
                     )
                 })
             } 
-            <ModalView header={`More details about ${user.name}`} user={user} btnText='Show More' />
+            
+            <ModalView 
+                header={`More details about ${user.name}`}
+                data={user.details}
+                btnText='Show on same page' />
+            <Button>Show on New Page</Button>
         </div>
     )
 }

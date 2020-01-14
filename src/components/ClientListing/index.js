@@ -38,7 +38,11 @@ function ClientListing(props) {
               </Col>
               <Col sm={3}>
                  
-                <ExportComponent />
+                <ExportComponent 
+                   headers={attrs}
+                   data={props.filtered_data}
+                   
+                />
                 
               </Col>
            
@@ -71,7 +75,7 @@ function ClientListing(props) {
             
           />
           <center><PaginationComponent pageCount={getPageCount(props.filtered_data.length,props.itemsPerPage)} /> </center>
-         
+            
          </div>
             :props.mode==='graph'?
           <VisComponent /> 

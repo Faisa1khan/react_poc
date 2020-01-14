@@ -7,7 +7,7 @@ const initialState={
     itemsPerPage:5,
     filter:null,
     activePage:1,
-    mode:'report'
+    mode:'list'
 
 }
 

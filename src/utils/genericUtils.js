@@ -89,7 +89,7 @@ const flattenedData=(data,newData)=>{
      
     Object.keys(data).map((key)=>{
         if(typeof(data[key])=='object' && data[key].length==undefined){
-            getFlattenedData(data[key],newData)
+            flattenedData(data[key],newData)
         }
         else if(typeof(data[key])=='object' && data[key].length!==undefined)
         {
@@ -97,6 +97,9 @@ const flattenedData=(data,newData)=>{
         }
         else
         {
+            //Solve edge cases in case of Boolean showing 1 and 0
+            //NaN
+            //
             newData[key]=data[key]
         }
          
