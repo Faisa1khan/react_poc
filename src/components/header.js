@@ -24,6 +24,9 @@ const Header = () => {
       <Nav.Link as={Link} to='/data-vis-demo'>
         Data Vis
       </Nav.Link>
+      <Nav.Link as={Link} to='/upload-error'>
+        Upload Error
+      </Nav.Link>
     </Nav>
   );
 };

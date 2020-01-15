@@ -10,6 +10,7 @@ import ClientListing from "./components/ClientListing";
 import AuthComponent from "./components/AuthComponent";
 import ImageUploadComponent from "./components/ImageUploadComponent";
 import DataVis from "./components/DataVis";
+import UploadError from "./components/UploadError";
 
 function App() {
 
@@ -34,7 +35,7 @@ function App() {
         <Route exact path="/auth" component={AuthComponent} />
         <Route exact path='/profile' component={ImageUploadComponent} />
         <Route exact path='/data-vis-demo' component={DataVis}/>
-
+        <Route exact path='/upload-error' component={UploadError} />
       </BrowserRouter>
     </div>
   );
