@@ -17,6 +17,7 @@ import {
     history
 } from "../../utils";
 
+import { useDebounce } from "../../components/customHooks";
 
 const ListingPage = (props) => {
     const { data, filters, flags } = props; 
@@ -35,10 +36,11 @@ const ListingPage = (props) => {
 
     // search-bar
     const [searchText, setSearchText] = useState('');
+    const debouncedTxt = useDebounce(searchText, 400);
+    
     useEffect(() => {
             props.setSearchFilter(searchText);
-    }, [searchText])
-
+    }, [debouncedTxt])
 
 
     // pagination

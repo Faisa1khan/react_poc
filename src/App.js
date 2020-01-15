@@ -41,7 +41,8 @@ function App() {
             <PrivateRoute exact path="/detail">
               <DetailPage />
             </PrivateRoute>
-            <PrivateRoute exact path="/server-list" render={() => <div>server</div>} >
+            <PrivateRoute exact path="/server-list" >
+              <div>Server-list</div>
             </PrivateRoute>
           </Switch>
         </Container>

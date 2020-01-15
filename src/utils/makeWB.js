@@ -1,4 +1,7 @@
+// make work book/excel for given data
+
 import XLSX from "xlsx";
+
 
 // data - json or 2d array
 // sheetName - name of sheet in workbook/excel file

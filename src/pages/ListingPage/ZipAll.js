@@ -18,6 +18,7 @@ function ZipAll(props){
         if(props.data.filtered && props.data.filtered.length>0)
             workBooks.push(makeWB(props.data.filtered, 'listing'));
         
+        // zip
         const zip = new JSZip();
         workBooks.forEach((wb, count) => {
             const wbout = XLSX.write(wb, {bookType: 'xlsx', type: 'binary'});
