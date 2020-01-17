@@ -1,13 +1,12 @@
 import React from "react";
 
-
-const Table = ({data}) => {
+export function Table({data}) {
     if(!data)
-        return <div>TableError</div>
+        return <div>TableEmpty</div>
     if(data.constructor !== Array)
-        return <div>TableError</div>
+        return <div>Data Invalid</div>
     if(data.length<1)
-        return <div>TableError</div>
+        return <div>Data Empty</div>
 
     const tableHeadings = Object.keys(data[0]);
 
@@ -23,9 +22,11 @@ const Table = ({data}) => {
             </thead>
             <tbody>
                 {
-                    data.map(item => 
-                        <tr key={item._id}>
-                            {Object.values(item).map(val => <td>{String(val) || JSON.stringify(val)}</td>)}
+                    data.map((item, id) => 
+                        <tr key={item._id || id}>
+                            {Object.values(item).map(val => { 
+                                return <td>{String(val)}</td>;
+                            })}
                         </tr>
                     )
                 }
@@ -34,5 +35,3 @@ const Table = ({data}) => {
         </div>
     )
 }
-
-export default Table;

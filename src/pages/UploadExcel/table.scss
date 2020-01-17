@@ -1,0 +1,16 @@
+
+.upload-excel-page{
+    td{
+        width: 100px;
+        border: 1px solid black;
+        &.error{
+            background-color: lighten(red, 40%);
+        }
+    }   
+    .key{
+        &.rowkey{
+            width: 30px;
+        }
+        background-color: lightgray;
+    } 
+}

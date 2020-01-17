@@ -11,7 +11,7 @@ import { Loader } from "../../components/commons";
 const URL = 'https://api.myjson.com/bins/mxibk';
 // {"name":"Jule","gender":"Male","country":"Greece","department":"Electronics","ctc":4.4}
 
-export default function VisualDashBoard(props) {
+export function VisualDashboard(props) {
     // loading flag
     const [loading, setLoading] = useState(true);
 

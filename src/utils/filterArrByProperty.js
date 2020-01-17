@@ -1,3 +1,4 @@
+import { isObject } from "../utils";
 
 export function filterArrByProperty(items, property, propertyValue){
     if(!items)
@@ -16,8 +17,20 @@ export function filterArrByProperty(items, property, propertyValue){
         return Promise.reject('propertyValue must by string');
     
     return items.filter(item => {
-        if(String(item[property]) === propertyValue)
+        const [key, value] = getKeyValue(item, property);
+        if(key && String(value) === propertyValue)
             return true;
         return false;
     })
+}
+
+// returns [key, value] in any kind of object(nested) on a given key
+function getKeyValue(obj, key){
+    for(const _key of Object.keys(obj)){
+        if(key === _key)
+            return [_key, obj[_key]];
+        if(isObject(obj[_key]))
+            return getKeyValue(obj[_key], key);
+    }
+    return [undefined, undefined];
 }

@@ -8,3 +8,5 @@ export * from "./sortArrByProperty";
 export * from "./genTagIDForChart";
 export * from "./stringToArrayBuffer";
 export * from "./makeWB";
+export * from "./isArray";
+export * from "./isObject";

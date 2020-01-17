@@ -10,14 +10,16 @@ import { history } from "./utils";
 // components
 import Container from "./components/Container";
 import Header from "./components/Header/Header";
-import PrivateRoute from "./components/privateRoute"
+import PrivateRoute from "./components/privateRoute";
 
-// pages
-import LoginPage from "./pages/LoginPage/LoginPage";
-import ListingPage from "./pages/ListingPage";
-import ProfilePage from "./pages/ProfilePage/ProfilePage";
-import VisualDashboard from "./pages/VisualDashboard";
-import DetailPage from "./pages/DetailPage";
+import { 
+  LoginPage, 
+  ListingPage, 
+  ProfilePage, 
+  VisualDashboard, 
+  DetailPage,
+  UploadExcel 
+} from "./pages";
 
 function App() {
   return (
@@ -40,6 +42,9 @@ function App() {
             </PrivateRoute>
             <PrivateRoute exact path="/detail">
               <DetailPage />
+            </PrivateRoute>
+            <PrivateRoute exact path="/upload">
+              <UploadExcel />
             </PrivateRoute>
             <PrivateRoute exact path="/server-list" >
               <div>Server-list</div>

@@ -31,17 +31,9 @@ function getInitialListing(){
             .then(res => res.data)
             .then(data => {
                 if (data.length>0){
-                    // transform data
-                    const _data = data.map(item => {
-                        const details = {...item.details};
-                        delete item.details;
-                        return {
-                            ...item,
-                            ...details
-                        }
-                    })
-                    dispatch(success(_data))  
+                    return dispatch(success(data))  
                 }
+                dispatch(failure('response data empty'));
             })
             .catch(error => dispatch(failure(error)))
     }
@@ -52,6 +44,7 @@ function getInitialListing(){
 
 function filterListing(arr, filters){
     let filtered = [...arr];
+    
     //console.log(arr, filters);
     const { byProperty, bySearch, sort } = filters;
     if(bySearch && bySearch.length >= 3)

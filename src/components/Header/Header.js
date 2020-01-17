@@ -31,6 +31,9 @@ const Header = (props) => {
           {loggedIn && 
             <Link className="nav-link" to="/visual">Visual</Link>
           }
+          <li className="nav-item">
+            <Link className="nav-link" to="/upload">Upload</Link>
+          </li>
         </ul>
       </div>
     </nav>

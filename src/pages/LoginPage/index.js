@@ -32,4 +32,5 @@ const mapActions = {
     login: authActions.login
 }
 
-export default connect(mapState, mapActions)(LoginPage);
+const con = connect(mapState, mapActions)(LoginPage);
+export { con as LoginPage };

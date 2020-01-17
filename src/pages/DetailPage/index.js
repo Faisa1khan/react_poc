@@ -3,17 +3,7 @@ import profile from "../../assests/images/profile.jpg";
 import { connect } from "react-redux";
 import { detailPageActions } from "../../actions";
 import { Loader } from "../../components/commons";
-/* const getUsers = () => {
-    const URL = 'https://jsonplaceholder.typicode.com/users';
-    axios({
-        method: 'GET',
-        url: URL
-    })
-    .then(res => res.data)
-    .then(data => {
-        
-    })
-} */
+
 
 function DetailPage(props){
     useEffect(() => {
@@ -67,4 +57,5 @@ const mapState = (state) => ({
 const mapActions = {
     getDetail : detailPageActions.getDetail
 }
-export default connect(mapState, mapActions)(DetailPage);
+const con = connect(mapState, mapActions)(DetailPage);
+export { con as DetailPage} ;

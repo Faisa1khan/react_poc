@@ -61,22 +61,22 @@ export default function ExportBar(props){
 
     return (
         <div className="export-bar d-flex">
-            <div class="dropdown export" onChange={handleChange} onClick={handleChange}>
-                <button class="btn btn-secondary btn-sm dropdown-toggle" role="button" id="export-bar-export-btn" data-toggle="dropdown">
+            <div className="dropdown export" onChange={handleChange} onClick={handleChange}>
+                <button className="btn btn-secondary btn-sm dropdown-toggle" role="button" id="export-bar-export-btn" data-toggle="dropdown">
                     Export
                 </button>
-                <div class="dropdown-menu" aria-labelledby="export-bar-export-btn">
-                    <a class="dropdown-item" data-format-type={formatType.XLSX} data-export-type={exportType.NORMAL} href="#">Excel</a>
-                    <a class="dropdown-item" data-format-type={formatType.CSV} data-export-type={exportType.NORMAL} href="#">CSV</a>
+                <div className="dropdown-menu" aria-labelledby="export-bar-export-btn">
+                    <a className="dropdown-item" data-format-type={formatType.XLSX} data-export-type={exportType.NORMAL} href="#">Excel</a>
+                    <a className="dropdown-item" data-format-type={formatType.CSV} data-export-type={exportType.NORMAL} href="#">CSV</a>
                 </div>
             </div>
-            <div class="dropdown bulk-export ml-2" onClick={handleChange}>
-                <button class="btn btn-secondary btn-sm dropdown-toggle" role="button" id="export-bar-bulk-export-btn" data-toggle="dropdown">
+            <div className="dropdown bulk-export ml-2" onClick={handleChange}>
+                <button className="btn btn-secondary btn-sm dropdown-toggle" role="button" id="export-bar-bulk-export-btn" data-toggle="dropdown">
                     Bulk Export
                 </button>
-                <div class="dropdown-menu" aria-labelledby="export-bar-bulk-export-btn">
-                    <a class="dropdown-item" data-format-type={formatType.XLSX} data-export-type={exportType.BULK} href="#">Excel</a>
-                    <a class="dropdown-item" data-format-type={formatType.CSV} data-export-type={exportType.BULK} href="#">CSV</a>
+                <div className="dropdown-menu" aria-labelledby="export-bar-bulk-export-btn">
+                    <a className="dropdown-item" data-format-type={formatType.XLSX} data-export-type={exportType.BULK} href="#">Excel</a>
+                    <a className="dropdown-item" data-format-type={formatType.CSV} data-export-type={exportType.BULK} href="#">CSV</a>
                 </div>
             </div>
         </div>

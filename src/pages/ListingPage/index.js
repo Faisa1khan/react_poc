@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
-import Table from "../../components/Table";
+import { ListingTable } from "../../components/_Table";
 import ReactPaginate from 'react-paginate';
 import "./pagination.scss";
 import Search from "../../components/Search";
@@ -9,6 +9,7 @@ import FilterBar from "./FilterBar";
 import ExportBar from "./ExportBar";
 import ZipAll from "./ZipAll";
 import { Loader, Button } from "../../components/commons";
+import { ViewModal } from "../../components/Modals";
 
 import { listingActions } from "../../actions";
 
@@ -67,12 +68,33 @@ const ListingPage = (props) => {
         setPageNumber(selected);
     }
 
+    // view modal
+    const [modalData, setModalData] = useState({});
+    useEffect(() => {
+        if(!props.modal.identifier)
+            return;
+        const { identifier } = props.modal;
+        console.log('here', identifier);
+        const key = Object.keys(identifier)[0];
+        console.log('key', key)
+        console.log('data', data.all)
+        const item = data.all.find(item => item['_id']===identifier[key]);
+        console.log(item);
+        setModalData(item.details);
+    }, [props.modal])
+    
+
+
     // render
     if(flags.loading)
         return (<Loader/>);
     
     return (
         <div className="listing-page">
+            <ViewModal 
+                id='view-modal' 
+                data={modalData}
+            />
             <div className="d-flex">
                 <div className="listing-page__searchbar">
                     <Search 
@@ -99,7 +121,7 @@ const ListingPage = (props) => {
                 </div>
             </div>
             <div className="listing-page__table">
-                <Table 
+                <ListingTable 
                     data={paginatedItems}
                 /> 
             </div>
@@ -126,7 +148,8 @@ const ListingPage = (props) => {
 const mapState = ({listing}) => ({
     data: listing.data,
     filters: listing.filters,
-    flags: listing.flags
+    flags: listing.flags,
+    modal: listing.modal
 });
 const mapActions = {
     getInitialListing: listingActions.getInitialListing,
@@ -134,4 +157,5 @@ const mapActions = {
     setSearchFilter: listingActions.setSearchFilter
 };
 
-export default connect(mapState, mapActions)(ListingPage);
+const con = connect(mapState, mapActions)(ListingPage);
+export { con as ListingPage };
