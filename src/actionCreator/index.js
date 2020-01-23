@@ -4,7 +4,7 @@ export function fetchDataDetails(url, data) {
   return apiAction({
     url: url,
     onSuccess: setDataDetails,
-    onFailure: () => console.log("Error occured loading articles"),
+    onFailure: () => console.log("Error occured loading data"),
     label: FETCH_DATA_USING_API,
     data: data
   });

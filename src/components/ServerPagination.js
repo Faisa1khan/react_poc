@@ -1,17 +1,19 @@
-import React, { useEffect, useState, useMemo, useCallback } from "react";
-import { Container, Spinner, Button } from "react-bootstrap";
+import React, { useEffect, useState, useMemo, Fragment } from "react";
+import { Container, Button } from "react-bootstrap";
 import Lists from "./listing/Lists";
 import ListHeader from "./listing/ListHeader";
 import ListFooter from "./listing/Pagination";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 import { fetchDataDetails } from "../actionCreator";
 import Chart from "./HighCharts/Charts";
+import Loading from "./Loader/Loading";
+import PivotTable from "./PivotTable/Table";
+
 const ServerPagination = props => {
   console.log(props.data, props.isLoading);
   const { data = [], isLoading, fetchDataDetails } = props;
-  const [chart, showChart] = useState(false);
-  console.log(chart);
+  // const [data, setData] = useState([]);
+  const [mode, setMode] = useState("List");
   const [params, setParams] = useState({
     q: "",
     _page: 1,
@@ -21,41 +23,28 @@ const ServerPagination = props => {
   });
 
   const queryParams = useMemo(() => params, [params]);
-  console.log("Being render");
 
   useEffect(() => {
+    console.log("Call effect");
     fetchDataDetails("http://localhost:4000/employee", queryParams);
   }, [queryParams]);
-
-  // if (error) {
-  //   console.warn(JSON.stringify(error));
-  //   return <p>{error.message}</p>;
-  // }
 
   return (
     <Container>
       <ListHeader
-        paramsInput={{ params, setParams, chart, showChart }}
+        paramsInput={{ params, setParams, mode, setMode }}
         data={data}
       />
-
-      {chart ? (
-        <Chart data={data} />
-      ) : isLoading ? (
-        <Button variant="primary" disabled className="mb-2">
-          <Spinner
-            as="span"
-            animation="grow"
-            size="sm"
-            role="status"
-            aria-hidden="true"
-          />
-          Loading...
-        </Button>
-      ) : (
-        <Lists data={data} paramsInput={{ params, setParams }} />
+      {isLoading && <Loading />}
+      {mode === "List" && (
+        <Fragment>
+          <Lists data={data} paramsInput={{ params, setParams }} />
+          <ListFooter paramsInput={{ params, setParams }} />
+        </Fragment>
       )}
-      {!chart && <ListFooter paramsInput={{ params, setParams }} />}
+
+      {mode === "Chart" && <Chart data={data} />}
+      {mode === "PivotTable" && <PivotTable data={data} />}
     </Container>
   );
 };
@@ -65,12 +54,8 @@ const mapStateToProps = state => ({
   isLoading: state.api.isLoadingData
 });
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    {
-      fetchDataDetails
-    },
-    dispatch
-  );
+const mapDispatchToProps = {
+  fetchDataDetails
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ServerPagination);

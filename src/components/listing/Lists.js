@@ -13,6 +13,7 @@ const Lists = ({ data }) => {
           <th>City</th>
           <th>CTC</th>
           <th>Country</th>
+          <th>More Details</th>
         </tr>
       </thead>
       <tbody>

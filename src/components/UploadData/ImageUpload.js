@@ -11,7 +11,7 @@ function readFile(file) {
   return new Promise(resolve => {
     const reader = new FileReader();
     reader.addEventListener("load", () => resolve(reader.result), false);
-    reader.readAsDataURL(file);
+    reader.readAsText(file);
   });
 }
 
@@ -52,7 +52,8 @@ const ImageCropper = () => {
   const onFileChange = async e => {
     if (e.target.files && e.target.files.length > 0) {
       const imageDataUrl = await readFile(e.target.files[0]);
-      setImageUrl(imageDataUrl);
+      console.log(imageDataUrl);
+      // setImageUrl(imageDataUrl);
     }
   };
 

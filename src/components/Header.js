@@ -22,9 +22,7 @@ const Header = () => {
           <Nav.Link as={Link} to="/upload-image">
             Upload
           </Nav.Link>
-          <Nav.Link as={Link} to="/Chart">
-            Chart
-          </Nav.Link>
+
           <Nav.Link as={Link} to="/word-cloud">
             Word Cloud
           </Nav.Link>

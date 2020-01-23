@@ -11,6 +11,7 @@ import ImageCropper from "./components/UploadData/ImageUpload";
 import Demo from "./components/HighCharts/demo";
 import Chart from "./components/HighCharts/Charts";
 import Table from "./components/PivotTable/Table";
+import PreviewData from "./components/UploadData/PreviewData";
 function App() {
   const { auth, signin } = useAuth();
   return (
@@ -25,10 +26,10 @@ function App() {
             render={() => <div>Client Side</div>}
           />
           <Route exact path="/word-cloud" component={Demo} />
-          <Route exact path="/chart" component={Chart} />
           <Route exact path="/server-side" component={ServerPagination} />
           <Route exact path="/upload-image" component={ImageCropper} />
           <Route exact path="/table" component={Table} />
+          <Route exact path="/upload" component={PreviewData} />
         </div>
       ) : (
         <Auth signin={signin} />
