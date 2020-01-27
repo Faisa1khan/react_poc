@@ -12,6 +12,7 @@ import Demo from "./components/HighCharts/demo";
 import Chart from "./components/HighCharts/Charts";
 import Table from "./components/PivotTable/Table";
 import PreviewData from "./components/UploadData/PreviewData";
+import CaptureVedio from "./components/Vedio/CaptureVedio";
 function App() {
   const { auth, signin } = useAuth();
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route exact path="/upload-image" component={ImageCropper} />
           <Route exact path="/table" component={Table} />
           <Route exact path="/upload" component={PreviewData} />
+          <Route exact path="/vedio" component={CaptureVedio} />
         </div>
       ) : (
         <Auth signin={signin} />
