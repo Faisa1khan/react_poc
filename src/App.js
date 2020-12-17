@@ -1,31 +1,42 @@
 import React from "react";
+
 import "./App.css";
-import { Player } from "video-react";
 import "../node_modules/video-react/dist/video-react.css"; // import css
-import MultiLanguage from "./components/MultiLanguage";
-import VideoSource from "./components/VideoSource";
-import Header from "./components/header";
-import { BrowserRouter, Route } from "react-router-dom";
-
+import Auth from "./auth";
+import { Route } from "react-router-dom";
+import Header from "./components/Header";
+import ServerPagination from "./components/ServerPagination";
+import { useAuth } from "./utils/hooks/useAuth";
+import ImageCropper from "./components/UploadData/ImageUpload";
+import Demo from "./components/HighCharts/demo";
+import Chart from "./components/HighCharts/Charts";
+import Table from "./components/PivotTable/Table";
+import PreviewData from "./components/UploadData/PreviewData";
+import CaptureVedio from "./components/Vedio/CaptureVedio";
 function App() {
+  const { auth, signin } = useAuth();
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Header />
-
-        {/* <MultiLanguage /> */}
-        {/* <Player muted={true} fluid={false} width={500} height={500}>
-        <VideoSource
-          isVideoChild
-          src="https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"
-        />
-      </Player> */}
-
-        <Route exact path="/" render={() => <div>Home</div>} />
-        <Route exact path="/client-list" render={() => <div>client</div>} />
-        <Route exact path="/server-list" render={() => <div>server</div>} />
-      </BrowserRouter>
-    </div>
+    <>
+      {auth ? (
+        <div className="App">
+          <Header />
+          <Route exact path="/" render={() => <div>Home</div>} />
+          <Route
+            exact
+            path="/client-side"
+            render={() => <div>Client Side</div>}
+          />
+          <Route exact path="/word-cloud" component={Demo} />
+          <Route exact path="/server-side" component={ServerPagination} />
+          <Route exact path="/upload-image" component={ImageCropper} />
+          <Route exact path="/table" component={Table} />
+          <Route exact path="/upload" component={PreviewData} />
+          <Route exact path="/vedio" component={CaptureVedio} />
+        </div>
+      ) : (
+        <Auth signin={signin} />
+      )}
+    </>
   );
 }
 
